@@ -3,7 +3,9 @@
 Projet d'informatique de l'UE _Informatique Avancée : Modélisation Numérique et Programmation Orientée Objet C++_ dans le cadre d'une formation en Master 1/Magistère 2 de Physique Fondamentale à l'Université Paris-Saclay. Sujet Libre. Langage de programmation majoritairement en C++. Par Elianor Hoffmann et Pierre Boistier.
 
 ## Contexte
-_Reversi_ (1880, Angleterre, Lewis Waterman et John W. Mollet), aussi connu sous le nom _Othello_ (1971, Japon, Goro Hasegawa) est un jeu de société combinatoire abstrait pouvant rappeler les jeux de dames, échecs ou go par son plateau, ses pions et ses mécanismes. Il se joue sur un plateau unicolore de 8x8 cases, appelé othellier (cf. Figure 1). Les joueurs disposent de 64 pions bicolores, noirs d’un côté et blancs de l’autre. Les joueurs jouent à tour de rôle, chacun étant tenu de capturer des pions adverses lors de son mouvement. La capture de pions survient lorsqu’un joueur place un de ses pions à l’extrémité d’un alignement de pions adverses contigus et dont l’autre extrémité est déjà occupée par un de ses propres pions (cf. Figure 1). Le jeu s’arrête quand les deux joueurs ne peuvent plus poser de pion. Le gagnant en fin de partie est celui qui possède le plus de pions de sa couleur. 
+_Reversi_ (1880, Angleterre, Lewis Waterman et John W. Mollet), aussi connu sous le nom _Othello_ (1971, Japon, Goro Hasegawa) est un jeu de société combinatoire abstrait pouvant rappeler les jeux de dames, échecs ou go par son plateau, ses pions et ses mécanismes. Il se joue sur un plateau unicolore de 8x8 cases, appelé othellier (_cf_. Figure 1). Les joueurs disposent de 64 pions bicolores, noirs d’un côté et blancs de l’autre. Les joueurs jouent à tour de rôle, chacun étant tenu de capturer des pions adverses lors de son mouvement. La capture de pions survient lorsqu’un joueur place un de ses pions à l’extrémité d’un alignement de pions adverses contigus et dont l’autre extrémité est déjà occupée par un de ses propres pions (_cf_. Figure 1). Le jeu s’arrête quand les deux joueurs ne peuvent plus poser de pion. Le gagnant en fin de partie est celui qui possède le plus de pions de sa couleur. 
+
+<img src="docs/othello.jpg" width="90%">
 
 Coder un jeu de société est un projet qui se prête particulièrement à une programmation orientée objet. En effet, l’utilisation de classes est naturelle, que ce soit pour coder le plateau, les joueurs humains et les joueurs "ordinateurs". L’hérédité sera notamment pertinente lorsqu’il s’agira de complexifier progressivement les algorithmes de jeu dits "ordinateurs", un joueur (sauf pour le premier) étant une classe fille d’un joueur avec une approche plus simpliste.
 
@@ -19,8 +21,8 @@ L’algorithme _minimax_ pourra donner lieu à plusieurs joueurs, en fonction du
 Finalement, l’objectif est de comparer toutes ces différentes méthodes en simulant de nombreuses parties et en observant les nombre moyen et écart-type des pions sur le plateau en fin de partie. Il s’agira ainsi de déterminer l’algorithme le plus efficace pour gagner à _Othello_, en nombre de victoires, en nombre de pions sur le plateau en fin de partie, et en temps d’exécution.
 
 ## Références bibliographiques
-\[1] : _Page Wikipedia de Othello (jeu)._ adresse : fr.wikipedia.org/wiki/Othello_(jeu) ;
-\[2] : _Site internet de la Fédération Française d’Othello._ adresse : www.ffothello.org.  
+\[1] : _Page Wikipedia de Othello (jeu)._ adresse : fr.wikipedia.org/wiki/Othello_(jeu) ;   
+\[2] : _Site internet de la Fédération Française d’Othello._ adresse : www.ffothello.org .
 
 # Implémentation
 
@@ -32,4 +34,4 @@ Implémentation en C++, Python3. Modules utilisés : .
 - [x] Comprendre les enjeux du jeu _Othello_ ;
 - [ ] Implémenter un environnement et une interface permettant de jouer à _Othello_ ;
 - [ ] Concevoir et implémenter des algorithmes dits "ordinateurs" pour jouer à _Othello_ ;
-- [ ] Comparer les performances (en terme de temps et de résultats) des différentes algorithmes et en tirer une conclusion.
+- [ ] Comparer les performances (en terme de temps et de résultats) des différents algorithmes et en tirer une conclusion.
