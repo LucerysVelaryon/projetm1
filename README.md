@@ -26,17 +26,17 @@ Finalement, l’objectif est de comparer toutes ces différentes méthodes en si
 
 # Règles du jeu 
 
-## Matériel
+### Matériel
 * 1 plateau unicolore de 8x8 cases (othellier). Les lignes sont numérotées de haut en bas de 1 à 8 et les colonnes sont étiquetées de gauche à droite, de ‘a’ à ‘h’.
 * 64 pions bicolores (noirs d'un côté et blancs de l'autre). 
 
-## But du jeu 
+### But du jeu 
 Posséder le plus de pions de sa couleur en fin de partie
 
-## Position de départ
+### Position de départ
 Noir commence.
 
-## Poser un pion
+### Poser un pion
 A son tour de jeu, le joueur doit poser un pion de sa couleur. Trois conditions sont nécessaires :
 1. le pion doit être posé sur une case vide ;
 2. la case doit être adjacente à un pion adverse ;
@@ -44,10 +44,10 @@ A son tour de jeu, le joueur doit poser un pion de sa couleur. Trois conditions 
 
 Si le joueur ne peut répondre à ces 3 conditions, il ne peut poser et doit passer.
 
-## Retourner les pions pris en sandwich
+### Retourner les pions pris en sandwich
 Il retourne alors de sa couleur le ou les pions qu’il vient d’encadrer. Les pions ne sont ni retirés de l’othellier, ni déplacés d’une case à l’autre. L’encadrement peut être effectué dans les 8 directions (les diagonales sont donc possibles). Les réactions en chaîne ne sont pas possibles.
 
-## Fin du jeu
+### Fin du jeu
 Lorsqu’aucun coup légal n’est possible de la part des deux joueurs. Cela intervient généralement lorsque les 64 cases sont occupées.
 
 # Implémentation
