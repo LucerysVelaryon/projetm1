@@ -1,5 +1,6 @@
 #include <iostream>     // entrée/sorties
 #include <math.h>
+#include "annexes.cpp"
 
 using namespace std;
 
@@ -20,9 +21,11 @@ void grille_init()
 
 void affichageBrut()
 {
+	cout <<  endl << "     0    1    2    3    4    5    6    7  " ;
+	cout << endl << "  -----------------------------------------" << endl;
 	for (int i=0; i<8; i++)
 	{
-		cout << " | " ;
+		cout << i << " | " ;
 		for (int j=0; j<8; j++)
 		{
 			if (grille[i][j] == 1)
@@ -32,19 +35,20 @@ void affichageBrut()
 			else
 				cout << grille[i][j] << " | " ;
 		}
-		cout << endl;
+		cout << endl << "  -----------------------------------------" << endl;
 	}
 }
 
 void affichageJeu()
 {
-	cout <<  endl << "    0   1   2   3   4   5   6   7  " << endl << "  ---------------------------------" << endl;
+	cout <<  endl << "    0   1   2   3   4   5   6   7  " ;
+	cout << endl << "  ---------------------------------" << endl;
 	for (int i=0; i<8; i++)
 	{
 		cout << i << " | " ;
 		for (int j=0; j<8; j++)
 		{
-			if (grille[i][j] == 1 || grille[i][j] == 2 || grille[i][j] == 0 || grille[i][j] == -1)
+			if (estVide(grille[i][j]))
 				cout << ' ' << " | " ;
 			else if (grille[i][j] == 11)
 				cout << 'B' << " | " ;
@@ -58,7 +62,7 @@ void affichageJeu()
 int main()
 {
 	grille_init();
-	affichageJeu();
+	affichageBrut();
 
 	return 0;
 }
