@@ -18,26 +18,47 @@ void grille_init()
 	grille[2][3] = 2 ; grille[3][2] = 2 ; grille[5][4] = 2 ; grille[4][5] = 2;
 }
 
-void affichageBrut()
+void affichageBrut() 
 {
 	for (int i=0; i<8; i++)
 	{	
 		cout << " | " ;
 		for (int j=0; j<8; j++)
+		{
 			if (grille[i][j] == 1)
 				cout << "01" << " | " ;
 			else if (grille[i][j] == 2)
 				cout << "02" << " | " ;
 			else
 				cout << grille[i][j] << " | " ;
+		}
 		cout << endl;
+	}
+}
+
+void affichageJeu()
+{
+	cout <<  endl << "    0   1   2   3   4   5   6   7  " << endl << "  ---------------------------------" << endl;
+	for (int i=0; i<8; i++)
+	{	
+		cout << i << " | " ;
+		for (int j=0; j<8; j++)
+		{
+			if (grille[i][j] == 1 || grille[i][j] == 2 || grille[i][j] == 0 || grille[i][j] == -1)
+				cout << ' ' << " | " ;
+			else if (grille[i][j] == 11)
+				cout << 'B' << " | " ;
+			else if (grille[i][j] == 22)
+				cout << 'N' << " | " ;
+		}
+		cout << endl << "  ---------------------------------" << endl;
 	}
 }
 
 int main()
 {
 	grille_init();
-	affichageBrut();
+	affichageJeu();
 
 	return 0;
 }
