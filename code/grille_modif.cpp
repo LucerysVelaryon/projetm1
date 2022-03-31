@@ -5,7 +5,7 @@ using namespace std ;
 
 // fonctions de modifications des grilles après pose de pions
 
-void parcoursGrille(int x, int y, int coul, int methode)
+void rayonnement(int x, int y, int coul, int methode)
 {
   int var_x ; int var_y ; int compt ;
   bool licite_blanc  = false ; bool licite_noir = false ;
@@ -29,7 +29,7 @@ void parcoursGrille(int x, int y, int coul, int methode)
               for (size_t i = 1 ; i < compt ; i++)
               {
                 grille[x + (pas_x - 1) * i][y + (pas_y - 1) * i] = coul ;
-                parcoursGrille(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
+                rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
               }
             break ;
           }
@@ -81,22 +81,20 @@ void parcoursGrille(int x, int y, int coul, int methode)
   }
 }
 
-void retournerPions(int x, int y, int coul)     // fonction qui retourne les pions capturés, pour une couleur donnée
+void retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés, pour une couleur donnée
 {
-  int var_x ; int var_y ; int compt ;
-
   grille[x][y] = coul ;     // on place le pion joué
 
-  parcoursGrille(x, y, coul, 1) ;
+  rayonnement(x, y, coul, 1) ;
 
-  parcoursGrille(x, y, coul, 2) ;
+  rayonnement(x, y, coul, 2) ;
 
   for (size_t i = 0 ; i <= 7 ; i++)
   {
     for (size_t j = 0 ; j <= 7 ; j++)
     {
       if (grille[i][j] == 3)
-        parcoursGrille(i, j, coul, 3) ;
+        rayonnement(i, j, coul, 3) ;
     }
   }
 }
