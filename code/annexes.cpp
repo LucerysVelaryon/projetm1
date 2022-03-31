@@ -34,3 +34,11 @@ bool dedans(int x, int y)			// test case sur plateau
 {
 	return (x >= 0 && x <= 7 && y >= 0 && y <= 7) ;
 }
+
+int changeCouleur(int couleur)
+{
+	if (couleur == noir)
+		return blanc ;
+	else
+		return noir ;
+}
