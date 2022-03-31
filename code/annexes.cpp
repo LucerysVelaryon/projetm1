@@ -3,11 +3,21 @@
 
 using namespace std ;
 
-// fonctions simples et utiles partout, permettent une meilleure lisibilite du programme
+// fonctions simples et utiles partout, permettent une meilleure lisibilité du programme
 
 bool estVide(int i) 			// test case vide
 {
 	return (i == 0 || i == -1 || i == 1 || i == 2) ;
+}
+
+bool estB(int i)			// case occupée par blanc
+{
+	return (i == 11) ;
+}
+
+bool estN(int i)			// case occupée par noir
+{
+	return (i == 22) ;
 }
 
 bool liciteB(int i)			// test case licite blanc

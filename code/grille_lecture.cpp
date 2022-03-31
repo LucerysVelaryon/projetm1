@@ -3,7 +3,7 @@
 
 using namespace std ;
 
-// fonctions de declaration et de lecture de la grille de jeu en C++
+// fonctions de déclaration et de lecture de la grille de jeu en C++
 
 void grille_init()
 {
@@ -17,7 +17,7 @@ void grille_init()
 	grille[2][3] = 2 ; grille[3][2] = 2 ; grille[5][4] = 2 ; grille[4][5] = 2 ;			// cases licites noirs
 }
 
-void affichageBrut()			// affichage valeurs reelles matrice
+void affichageBrut()			// affichage valeurs réelles matrice
 {
 	cout <<  endl << "     0    1    2    3    4    5    6    7  " ;
 	cout << endl << "  -----------------------------------------" << endl ;
@@ -48,9 +48,9 @@ void affichageJeu()			// affichage grille avec cases vides, blanches ou noires
 		{
 			if (estVide(grille[i][j]))
 				cout << ' ' << " | " ;
-			else if (grille[i][j] == 11)
+			else if (estB(grille[i][j]))
 				cout << 'B' << " | " ;
-			else if (grille[i][j] == 22)
+			else if (estN(grille[i][j]))
 				cout << 'N' << " | " ;
 		}
 		cout << endl << "  ---------------------------------" << endl ;

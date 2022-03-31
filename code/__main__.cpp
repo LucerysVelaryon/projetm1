@@ -3,20 +3,22 @@
 
 using namespace std ;
 
-// declaration des variables globales
+// déclaration des variables globales
 
-int grille[8][8] ;		// declaration grille
+int grille[8][8] ;		// déclaration grille
 
 #include "annexes.cpp"
 #include "grille_lecture.cpp"
 #include "grille_modif.cpp"
 
-// execution du programme final en C++
+// éxecution du programme final en C++
 
 int main()
 {
 	grille_init() ;
-	affichageBrut() ;
+	affichageJeu() ;
+	retournerPions(5,4,22) ;
+	affichageJeu() ;
 
 	return 0 ;
 }
