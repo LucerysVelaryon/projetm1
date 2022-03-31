@@ -10,9 +10,12 @@ int grille[8][8] ;		// déclaration grille
 int noir = 22;
 int blanc = 11;
 
-#include "annexes.cpp"
-#include "grille_lecture.cpp"
-#include "grille_modif.cpp"
+#include "grille.cpp"
+// #include "test.cpp"
+// #include "annexes.cpp"
+// #include "grille_lecture.cpp"
+// #include "grille_modif.cpp"
+
 
 // éxecution du programme final en C++
 
@@ -55,8 +58,9 @@ int jouer()			// humain vs humain pour l'instant
 
 int main()
 {
-	grille_init() ;
-	//choix_joueurs();
-	jouer() ;
+	grille my_grille ;
+	my_grille.init() ;
+	my_grille.affichageJeu() ;
+
 	return 0 ;
 }
