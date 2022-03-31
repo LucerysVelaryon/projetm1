@@ -1,8 +1,6 @@
 #include <iostream>			// entrée/sorties
 #include <math.h>
 
-#include "annexes.cpp"
-
 using namespace std ;
 
 // fonctions de declaration et de lecture de la grille de jeu en C++
