@@ -7,7 +7,7 @@ using namespace std ;
 
 bool estVide(int i) 			// test case vide
 {
-	return (i == 0 || i == -1 || i == 1 || i == 2) ;
+	return (i == -1 || i == 0 || i == 1 || i == 2 || i == 3) ;
 }
 
 bool estB(int i)			// case occupée par blanc

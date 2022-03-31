@@ -30,6 +30,8 @@ void affichageBrut()			// affichage valeurs réelles matrice
 				cout << "01" << " | " ;
 			else if (grille[i][j] == 2)
 				cout << "02" << " | " ;
+			else if (grille[i][j] == 3)
+				cout << "33" << " | " ;
 			else
 				cout << grille[i][j] << " | " ;
 		}
