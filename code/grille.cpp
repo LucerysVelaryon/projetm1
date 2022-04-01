@@ -7,8 +7,8 @@ class grille {
   public:
     int g[8][8] ;
     int numero_tour ;
-    int jouable_blanc ;
-    int jouable_noir ;
+    int jouable_blanc ;   // nbLiciteB      //nb coups jouables blanc
+    int jouable_noir ;    //nb coups jouables noir
 
     void init() ;
 
@@ -22,7 +22,7 @@ class grille {
   private:
     void rayonnement(int x, int y, int coul, int methode) ;
 
-    void transformationJouabilite(int, int, int) ;
+    void transformationJouabilite(int, int, int) ;      // majNbCoupsLicite
 };
 
 void grille::init()
@@ -119,7 +119,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
         {
           if (estVide(g[var_x][var_y]))
           {
-            transformationJouabilite(x, y, -1) ;
+            this->transformationJouabilite(x, y, -1) ;
             g[var_x][var_y] = 3 ;
             break ;
           }
@@ -156,24 +156,23 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       g[x][y] = 2 ;
     else
       g[x][y] = -1 ;
-    transformationJouabilite(x, y, +1) ;
+    this->transformationJouabilite(x, y, +1) ;      
   }
 }
 
-void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés, pour une couleur donnée
+void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés et update la licité des cases vides concernées, pour une couleur donnée
 {
   g[x][y] = coul ;     // on place le pion joué
 
-  this->rayonnement(x, y, coul, 1) ;
-
-  this->rayonnement(x, y, coul, 2) ;
+  this->rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
+  this->rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)
 
   for (size_t i = 0 ; i <= 7 ; i++)
   {
     for (size_t j = 0 ; j <= 7 ; j++)
     {
       if (g[i][j] == 3)
-        this->rayonnement(i, j, coul, 3) ;
+        this->rayonnement(i, j, coul, 3) ;    // On update la licité des cases 3
     }
   }
 }

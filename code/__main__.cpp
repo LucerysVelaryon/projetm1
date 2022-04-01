@@ -32,7 +32,7 @@ int main()
 	for (size_t i = 0 ; i < nombre_joueurs ; i++)
 		cout << joueurs[i] << " : " << i << endl ;
 	cin >> num_joueur1 ;
-	humain joueur1 ;
+	humain joueur1 ;					// pour l'instant, joueur humain 
 	joueur1.init(noir) ;
 
 	cout << "Qui sera le joueur 2 (blanc) ?" << endl ;
@@ -42,7 +42,6 @@ int main()
 	humain joueur2 ;
 	joueur2.init(blanc) ;
 
-	int couleur = noir ;
 	int coup_x = 0, coup_y = 0 ;
 	grille_de_jeu.affichageJeu() ;
 	while (!grille_de_jeu.jeuFini())
