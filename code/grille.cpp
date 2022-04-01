@@ -21,8 +21,8 @@ class grille {
 
 void grille::init()
 {
-  for (int i = 0 ; i < 8 ; i++)
-		for (int j = 0 ; j < 8 ; j++)
+  for (size_t i = 0 ; i < 8 ; i++)
+		for (size_t j = 0 ; j < 8 ; j++)
 			g[i][j] = -1 ;			// cases vides
 
 	g[3][3] = 11 ; g[4][4] = 11 ;			// pions init blancs
@@ -35,10 +35,10 @@ void grille::affichageJeu() const
 {
 	cout << endl << "    0   1   2   3   4   5   6   7  " ;
 	cout << endl << "  ---------------------------------" << endl ;
-	for (int i = 0 ; i < 8 ; i++)
+	for (size_t i = 0 ; i < 8 ; i++)
 	{
 		cout << i << " | " ;
-		for (int j = 0 ; j < 8 ; j++)
+		for (size_t j = 0 ; j < 8 ; j++)
 		{
 			if (estVide(g[i][j]))
 				cout << ' ' << " | " ;
@@ -55,10 +55,10 @@ void grille::affichageBrut() const			// affichage valeurs réelles matrice
 {
 	cout <<  endl << "     0    1    2    3    4    5    6    7  " ;
 	cout << endl << "  -----------------------------------------" << endl ;
-	for (int i = 0 ; i < 8 ; i++)
+	for (size_t i = 0 ; i < 8 ; i++)
 	{
 		cout << i << " | " ;
-		for (int j = 0 ; j < 8 ; j++)
+		for (size_t j = 0 ; j < 8 ; j++)
 		{
 			if (g[i][j] == 1)
 				cout << "01" << " | " ;
