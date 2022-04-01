@@ -15,6 +15,8 @@ class grille {
 
     void retournerPlacer(int x, int y, int coul) ;
 
+    bool jeuFini() ;
+
   private:
     void rayonnement(int x, int y, int coul, int methode) ;
 };
@@ -165,4 +167,13 @@ void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourn
         this->rayonnement(i, j, coul, 3) ;
     }
   }
+}
+
+bool grille::jeuFini()
+{
+	for (size_t i = 0 ; i < 8 ; i++)
+		for (size_t j = 0 ; j < 8 ; j++)
+			if (liciteB(g[i][j]) || liciteN(g[i][j]) || estVide(g[i][j]))
+				return false ;
+	return true ;
 }
