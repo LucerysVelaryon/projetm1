@@ -53,13 +53,13 @@ int main()
 	int coup_x = 0, coup_y = 0 ;
 	while (!grille_de_jeu.jeuFini())
 	{
-		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.jouable_noir != 0))
+		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nbLiciteN != 0))
 		{
 			grille_de_jeu.affichageJeu() ;
 			joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
 		}
-		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.jouable_blanc != 0))
+		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nbLiciteB != 0))
 		{
 			grille_de_jeu.affichageJeu() ;
 			joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
