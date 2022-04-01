@@ -21,4 +21,5 @@ void ordi1::init(int coul)
 void ordi1::choixCoups(int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	
+	
 }
