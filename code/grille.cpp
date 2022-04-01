@@ -7,18 +7,22 @@ class grille {
   public:
     int g[8][8] ;
     int numero_tour ;
+    int jouable_blanc ;
+    int jouable_noir ;
 
     void init() ;
 
     void affichageJeu() const ;
     void affichageBrut() const ;
 
-    void retournerPlacer(int x, int y, int coul) ;
+    void retournerPlacer(int, int, int) ;
 
     bool jeuFini() ;
 
   private:
     void rayonnement(int x, int y, int coul, int methode) ;
+
+    void transformationJouabilite(int, int, int) ;
 };
 
 void grille::init()
@@ -31,6 +35,9 @@ void grille::init()
 	g[3][4] = 22 ; g[4][3] = 22 ;			// pions init noirs
 	g[2][4] = 1 ; g[3][5] = 1 ; g[5][3] = 1 ; g[4][2] = 1 ;			// cases licites blancs
 	g[2][3] = 2 ; g[3][2] = 2 ; g[5][4] = 2 ; g[4][5] = 2 ;			// cases licites noirs
+
+  jouable_blanc = 4 ;
+  jouable_noir = 4 ;
 }
 
 void grille::affichageJeu() const
@@ -112,6 +119,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
         {
           if (estVide(g[var_x][var_y]))
           {
+            transformationJouabilite(x, y, -1) ;
             g[var_x][var_y] = 3 ;
             break ;
           }
@@ -148,6 +156,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       g[x][y] = 2 ;
     else
       g[x][y] = -1 ;
+    transformationJouabilite(x, y, +1) ;
   }
 }
 
@@ -171,9 +180,18 @@ void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourn
 
 bool grille::jeuFini()
 {
-	for (size_t i = 0 ; i < 8 ; i++)
-		for (size_t j = 0 ; j < 8 ; j++)
-			if (liciteB(g[i][j]) || liciteN(g[i][j]) || estVide(g[i][j]))
-				return false ;
-	return true ;
+	return (jouable_noir == 0 && jouable_blanc == 0) ;
+}
+
+void grille::transformationJouabilite(int x, int y, int pas)
+{
+  if (g[x][y] == 0)
+  {
+    jouable_noir += pas ;
+    jouable_blanc += pas ;
+  }
+  else if (g[x][y] == 1)
+    jouable_blanc += pas ;
+  else if (g[x][y] == 2)
+    jouable_noir += pas ;
 }
