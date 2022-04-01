@@ -32,7 +32,7 @@ int main()
 	for (size_t i = 0 ; i < nombre_joueurs ; i++)
 		cout << joueurs[i] << " : " << i << endl ;
 	cin >> num_joueur1 ;
-	humain joueur1 ;					// pour l'instant, joueur humain 
+	humain joueur1 ;					// pour l'instant, joueur humain
 	joueur1.init(noir) ;
 
 	cout << "Qui sera le joueur 2 (blanc) ?" << endl ;
@@ -43,23 +43,23 @@ int main()
 	joueur2.init(blanc) ;
 
 	int coup_x = 0, coup_y = 0 ;
-	grille_de_jeu.affichageJeu() ;
 	while (!grille_de_jeu.jeuFini())
 	{
 		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.jouable_noir != 0))
 		{
+			grille_de_jeu.affichageJeu() ;
 			joueur1.demanderCoups(&coup_x, &coup_y) ;
 			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
-			grille_de_jeu.affichageJeu() ;
 		}
 		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.jouable_blanc != 0))
 		{
+			grille_de_jeu.affichageJeu() ;
 			joueur2.demanderCoups(&coup_x, &coup_y) ;
 			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
-			grille_de_jeu.affichageJeu() ;
 		}
 		grille_de_jeu.numero_tour += 1 ;
 	}
+	grille_de_jeu.affichageJeu() ;
 
 	return 0 ;
 }
