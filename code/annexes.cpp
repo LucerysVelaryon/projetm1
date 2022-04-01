@@ -30,6 +30,14 @@ bool liciteN(int i)			// test case licite noir
 	return (i == 0 || i == 2) ;
 }
 
+bool licite(int couleur, int i)
+{
+	if (couleur == blanc)
+		return (i == 0 || i == 1) ;
+	else
+		return (i == 0 || i == 2) ;
+}
+
 bool dedans(int x, int y)			// test case sur plateau
 {
 	return (x >= 0 && x <= 7 && y >= 0 && y <= 7) ;
@@ -41,4 +49,9 @@ int changeCouleur(int couleur)
 		return blanc ;
 	else
 		return noir ;
+}
+
+double round(double value) 
+{
+     return floor(value + 0.5);
 }
