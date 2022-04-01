@@ -7,13 +7,13 @@
 using namespace std;
 
 
-class ordi1	: public humain			// hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
+class aleatoire	: public humain			// hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
 {
   public:
     void choixCoups(grille, int*, int*) ;
 };
 
-void ordi1::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int nbCoupsPossibles = 0 ;
 	if (couleur == blanc)

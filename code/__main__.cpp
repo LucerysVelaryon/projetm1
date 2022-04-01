@@ -35,7 +35,7 @@ int main()
 	for (size_t i = 0 ; i < nombre_joueurs ; i++)
 		cout << joueurs[i] << " : " << i << endl ;
 	cin >> num_joueur1 ;
-	humain joueur1 ;					
+	humain joueur1 ;
 	joueur1.init(noir) ;
 
 	cout << "Qui sera le joueur 2 (blanc) ?" << endl ;
@@ -46,7 +46,7 @@ int main()
 	joueur2.init(blanc) ;*/
 
 	humain joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
-	ordi1 joueur2 ;
+	aleatoire joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
 
@@ -56,7 +56,7 @@ int main()
 		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.jouable_noir != 0))
 		{
 			grille_de_jeu.affichageJeu() ;
-			joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ; 								
+			joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
 		}
 		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.jouable_blanc != 0))
