@@ -7,8 +7,8 @@ class grille {
   public:
     int g[8][8] ;
     int numero_tour ;
-    int jouable_blanc ;   // nbLiciteB      //nb coups jouables blanc
-    int jouable_noir ;    //nb coups jouables noir
+    int nbLiciteB ;    //nb coups jouables blanc
+    int nbLiciteN ;    //nb coups jouables noir
 
     void init() ;
 
@@ -22,7 +22,7 @@ class grille {
   private:
     void rayonnement(int x, int y, int coul, int methode) ;
 
-    void transformationJouabilite(int, int, int) ;      // majNbCoupsLicite
+    void majNbCoupsLicite(int, int, int) ;      
 };
 
 void grille::init()
@@ -36,8 +36,8 @@ void grille::init()
 	g[2][4] = 1 ; g[3][5] = 1 ; g[5][3] = 1 ; g[4][2] = 1 ;			// cases licites blancs
 	g[2][3] = 2 ; g[3][2] = 2 ; g[5][4] = 2 ; g[4][5] = 2 ;			// cases licites noirs
 
-  jouable_blanc = 4 ;
-  jouable_noir = 4 ;
+  nbLiciteB = 4 ;
+  nbLiciteN = 4 ;
 }
 
 void grille::affichageJeu() const
@@ -134,7 +134,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
         {
           if (estVide(g[var_x][var_y]))
           {
-            this->transformationJouabilite(x, y, -1) ;
+            this->majNbCoupsLicite(x, y, -1) ;
             g[var_x][var_y] = 3 ;
             break ;
           }
@@ -150,7 +150,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
           else if (g[var_x][var_y] != coul)
           {
-            if (coul == 11)
+            if (coul == noir)
               licite_noir = true ;
             else
               licite_blanc = true ;
@@ -171,7 +171,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       g[x][y] = 2 ;
     else
       g[x][y] = -1 ;
-    this->transformationJouabilite(x, y, +1) ;
+    this->majNbCoupsLicite(x, y, +1) ;
   }
 }
 
@@ -194,18 +194,18 @@ void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourn
 
 bool grille::jeuFini()
 {
-	return (jouable_noir == 0 && jouable_blanc == 0) ;
+	return (nbLiciteN == 0 && nbLiciteB == 0) ;
 }
 
-void grille::transformationJouabilite(int x, int y, int pas)
+void grille::majNbCoupsLicite(int x, int y, int pas)
 {
   if (g[x][y] == 0)
   {
-    jouable_noir += pas ;
-    jouable_blanc += pas ;
+    nbLiciteN += pas ;
+    nbLiciteB += pas ;
   }
   else if (g[x][y] == 1)
-    jouable_blanc += pas ;
+    nbLiciteB += pas ;
   else if (g[x][y] == 2)
-    jouable_noir += pas ;
+    nbLiciteN += pas ;
 }

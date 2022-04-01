@@ -23,7 +23,7 @@ string joueurs[nombre_joueurs] = {"humain"} ;
 
 int main()
 {
-	srand48(time(NULL)); 		//Inititialise la graine, pour l'aléatoire de l'ordi
+	//srand48(time(NULL)); 		//Inititialise la graine, pour l'aléatoire de l'ordi
 
 	int num_joueur1, num_joueur2 ;
 	grille grille_de_jeu ;

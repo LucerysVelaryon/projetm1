@@ -17,26 +17,35 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 {
 	int nbCoupsPossibles = 0 ;
 	if (couleur == blanc)
-		nbCoupsPossibles = ma_grille.jouable_blanc;
+		nbCoupsPossibles = ma_grille.nbLiciteB;
 	else
-		nbCoupsPossibles = ma_grille.jouable_noir;
+		nbCoupsPossibles = ma_grille.nbLiciteN;
 
 	int alea = round(nbCoupsPossibles*drand48()) ;		// donne un entier entre 0 et nbCoupsPossibles
+	//int alea = floor(nbCoupsPossibles*drand48()) ;
 	int compt = 0;
 
+	cout << "alea: " << nbCoupsPossibles << ' ' << alea << endl;
+
 	for (size_t i = 0 ; i < 8 ; i++)
+	{
 		for (size_t j = 0 ; j < 8 ; j++)
+		{
 			if (licite(couleur, ma_grille.g[i][j]))
 			{
+				cout << compt << ' ' << i << ' ' << j << endl;
 				if (compt == alea)
 				{
+					cout << "compt=alea" << endl;
 					*coup_x = i ;
 					*coup_y = j ;
+					cout << endl << *coup_x << ' ' << *coup_y << endl;
 					goto fin_de_la_boucle;
 				}
 				else
 					compt++ ;
 			}
-
+		}
+	}
 	fin_de_la_boucle: ;
 }
