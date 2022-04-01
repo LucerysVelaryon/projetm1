@@ -4,15 +4,17 @@
 
 using namespace std ;
 
+#include "annexes.cpp"
+<<<<<<< HEAD
 // déclaration des variables globales
 
 int grille[8][8] ;		// déclaration grille
 int noir = 22;
 int blanc = 11;
 
-#include "annexes.cpp"
-#include "grille_lecture.cpp"
-#include "grille_modif.cpp"
+=======
+>>>>>>> classe_grille
+#include "grille.cpp"
 
 // éxecution du programme final en C++
 
@@ -55,8 +57,12 @@ int jouer()			// humain vs humain pour l'instant
 
 int main()
 {
-	grille_init() ;
-	//choix_joueurs();
-	jouer() ;
+	grille my_grille ;
+	my_grille.init() ;
+	my_grille.affichageJeu() ;
+	my_grille.retournerPlacer(5,4,22) ;
+	my_grille.affichageJeu() ;
+	my_grille.affichageBrut() ;
+
 	return 0 ;
 }
