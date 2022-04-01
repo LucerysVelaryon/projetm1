@@ -5,12 +5,15 @@
 using namespace std ;
 
 #include "annexes.cpp"
+<<<<<<< HEAD
 // déclaration des variables globales
 
 int grille[8][8] ;		// déclaration grille
 int noir = 22;
 int blanc = 11;
 
+=======
+>>>>>>> classe_grille
 #include "grille.cpp"
 
 // éxecution du programme final en C++
