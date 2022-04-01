@@ -49,8 +49,23 @@ void grille::affichageJeu() const
 		cout << i << " | " ;
 		for (size_t j = 0 ; j < 8 ; j++)
 		{
-			if (estVide(g[i][j]))
-				cout << ' ' << " | " ;
+      if (estVide(g[i][j]))
+      {
+        if (numero_tour % 2 == 0)
+        {
+          if (liciteN(g[i][j]))
+            cout << 'O' << " | " ;
+          else
+            cout << ' ' << " | " ;
+        }
+        else if (numero_tour % 2 != 0)
+        {
+          if (liciteB(g[i][j]))
+            cout << 'O' << " | " ;
+          else
+            cout << ' ' << " | " ;
+        }
+      }
 			else if (estB(g[i][j]))
 				cout << 'B' << " | " ;
 			else if (estN(g[i][j]))
@@ -156,7 +171,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       g[x][y] = 2 ;
     else
       g[x][y] = -1 ;
-    this->transformationJouabilite(x, y, +1) ;      
+    this->transformationJouabilite(x, y, +1) ;
   }
 }
 
