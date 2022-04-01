@@ -3,8 +3,6 @@
 
 using namespace std;
 
-#include "annexes.cpp"
-
 class grille {
   public:
     int g[8][8] ;
@@ -99,7 +97,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               for (size_t i = 1 ; i < compt ; i++)
               {
                 g[x + (pas_x - 1) * i][y + (pas_y - 1) * i] = coul ;
-                g.rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
+                this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
               }
             break ;
           }
@@ -155,16 +153,16 @@ void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourn
 {
   g[x][y] = coul ;     // on place le pion joué
 
-  rayonnement(x, y, coul, 1) ;
+  this->rayonnement(x, y, coul, 1) ;
 
-  rayonnement(x, y, coul, 2) ;
+  this->rayonnement(x, y, coul, 2) ;
 
   for (size_t i = 0 ; i <= 7 ; i++)
   {
     for (size_t j = 0 ; j <= 7 ; j++)
     {
       if (g[i][j] == 3)
-        rayonnement(i, j, coul, 3) ;
+        this->rayonnement(i, j, coul, 3) ;
     }
   }
 }

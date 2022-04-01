@@ -3,16 +3,8 @@
 
 using namespace std ;
 
-// déclaration des variables globales
-
-// int grille[8][8] ;		// déclaration grille
-
+#include "annexes.cpp"
 #include "grille.cpp"
-// #include "test.cpp"
-// #include "annexes.cpp"
-// #include "grille_lecture.cpp"
-// #include "grille_modif.cpp"
-
 
 // éxecution du programme final en C++
 
@@ -21,6 +13,9 @@ int main()
 	grille my_grille ;
 	my_grille.init() ;
 	my_grille.affichageJeu() ;
+	my_grille.retournerPlacer(5,4,22) ;
+	my_grille.affichageJeu() ;
+	my_grille.affichageBrut() ;
 
 	return 0 ;
 }
