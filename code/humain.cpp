@@ -9,7 +9,7 @@ class humain {
 
     void init(int) ;
 
-    void demanderCoups(int*, int*) ;
+    void choixCoups(grille, int*, int*) ;
 };
 
 void humain::init(int coul)
@@ -17,8 +17,8 @@ void humain::init(int coul)
   couleur = coul ;
 }
 
-void humain::demanderCoups(int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
-{
+void humain::choixCoups(grille ma_grille, int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+{																		// On rajoute un argument qui sert à rien pour avoir la même structure que ordi::choixCoups
 	if (couleur == blanc)
 		cout << "Au tour de blanc (joueur 2) : " << endl ;
 	else
