@@ -73,10 +73,6 @@ void grille::affichageJeu() const
     }
 		cout << endl << "  ---------------------------------" << endl ;
 	}
-  if (numero_tour % 2 == 0)
-    cout << "licites noirs : " << nb_licites_n << endl ;
-  else
-    cout << "licites blancs : " << nb_licites_n << endl ;
 }
 
 void grille::affichageBrut() const			// affichage valeurs réelles matrice
