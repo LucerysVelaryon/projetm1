@@ -7,8 +7,8 @@ class grille {
   public:
     int g[8][8] ;
     int numero_tour ;
-    int nbLiciteB ;    //nb coups jouables blanc
-    int nbLiciteN ;    //nb coups jouables noir
+    int nb_licites_b ;    //nb coups jouables blanc
+    int nb_licites_n ;    //nb coups jouables noir
 
     void init() ;
 
@@ -36,8 +36,8 @@ void grille::init()
 	g[2][4] = 1 ; g[3][5] = 1 ; g[5][3] = 1 ; g[4][2] = 1 ;			// cases licites blancs
 	g[2][3] = 2 ; g[3][2] = 2 ; g[5][4] = 2 ; g[4][5] = 2 ;			// cases licites noirs
 
-  nbLiciteB = 4 ;
-  nbLiciteN = 4 ;
+  nb_licites_b = 4 ;
+  nb_licites_n = 4 ;
 }
 
 void grille::affichageJeu() const
@@ -74,9 +74,9 @@ void grille::affichageJeu() const
 		cout << endl << "  ---------------------------------" << endl ;
 	}
   if (numero_tour % 2 == 0)
-    cout << "licites noirs : " << nbLiciteN << endl ;
+    cout << "licites noirs : " << nb_licites_n << endl ;
   else
-    cout << "licites blancs : " << nbLiciteN << endl ;
+    cout << "licites blancs : " << nb_licites_n << endl ;
 }
 
 void grille::affichageBrut() const			// affichage valeurs réelles matrice
@@ -125,7 +125,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               for (size_t i = 1 ; i < compt ; i++)
               {
                 g[x + (pas_x - 1) * i][y + (pas_y - 1) * i] = coul ;
-                rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
+                this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
               }
             break ;
           }
@@ -138,7 +138,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
         {
           if (estVide(g[var_x][var_y]))
           {
-            majNbCoupsLicite(var_x, var_y, -1) ;      // première petite erreur x au lieu de var_x
+            this->majNbCoupsLicite(var_x, var_y, -1) ;      // première petite erreur x au lieu de var_x
             g[var_x][var_y] = 3 ;
             break ;
           }
@@ -154,7 +154,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
           else if (g[var_x][var_y] != coul)
           {
-            if (coul == noir)
+            if (coul == blanc)        // troisième et ultime erreur je l'espère
               licite_noir = true ;
             else
               licite_blanc = true ;
@@ -175,41 +175,42 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       g[x][y] = 2 ;
     else
       g[x][y] = -1 ;
-    majNbCoupsLicite(x, y, 1) ;
+    this->majNbCoupsLicite(x, y, 1) ;
   }
 }
 
 void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés et update la licité des cases vides concernées, pour une couleur donnée
 {
+  this->majNbCoupsLicite(x, y, -1) ;        // deuxième petite erreur : un oubli
   g[x][y] = coul ;     // on place le pion joué
 
-  rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
-  rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)
+  this->rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
+  this->rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)
 
   for (size_t i = 0 ; i <= 7 ; i++)
   {
     for (size_t j = 0 ; j <= 7 ; j++)
     {
       if (g[i][j] == 3)
-        rayonnement(i, j, coul, 3) ;    // On update la licité des cases 3
+        this->rayonnement(i, j, coul, 3) ;    // On update la licité des cases 3
     }
   }
 }
 
 bool grille::jeuFini()
 {
-	return (nbLiciteN == 0 && nbLiciteB == 0) ;
+	return (nb_licites_n == 0 && nb_licites_b == 0) ;
 }
 
 void grille::majNbCoupsLicite(int x, int y, int pas)
 {
   if (g[x][y] == 0)
   {
-    nbLiciteN += pas ;
-    nbLiciteB += pas ;
+    nb_licites_n += pas ;
+    nb_licites_b += pas ;
   }
   else if (g[x][y] == 1)
-    nbLiciteB += pas ;
+    nb_licites_b += pas ;
   else if (g[x][y] == 2)
-    nbLiciteN += pas ;
+    nb_licites_n += pas ;
 }

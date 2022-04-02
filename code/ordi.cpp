@@ -17,9 +17,9 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 {
 	int nbCoupsPossibles = 0 ;
 	if (couleur == blanc)
-		nbCoupsPossibles = ma_grille.nbLiciteB;
+		nbCoupsPossibles = ma_grille.nb_licites_b;
 	else
-		nbCoupsPossibles = ma_grille.nbLiciteN;
+		nbCoupsPossibles = ma_grille.nb_licites_n;
 
 	int alea = arrondi(nbCoupsPossibles*drand48()) ;		// donne un entier entre 0 et nbCoupsPossibles
 	//int alea = floor(nbCoupsPossibles*drand48()) ;
