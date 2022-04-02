@@ -33,10 +33,10 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 		{
 			if (licite(couleur, ma_grille.g[i][j]))
 			{
-				cout << compt << ' ' << i << ' ' << j << endl;
+//				cout << compt << ' ' << i << ' ' << j << endl;
 				if (compt == alea)
 				{
-					cout << "compt=alea" << endl;
+//					cout << "compt=alea" << endl;
 					*coup_x = i ;
 					*coup_y = j ;
 					cout << endl << *coup_x << ' ' << *coup_y << endl;
