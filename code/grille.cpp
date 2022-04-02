@@ -22,7 +22,7 @@ class grille {
   private:
     void rayonnement(int x, int y, int coul, int methode) ;
 
-    void majNbCoupsLicite(int, int, int) ;      
+    void majNbCoupsLicite(int, int, int) ;
 };
 
 void grille::init()
@@ -112,7 +112,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       {
         var_x += (pas_x - 1) ;
         var_y += (pas_y - 1) ;
-        compt += 1 ;
+        compt++ ;
 
         if (methode == 1)     // retourner les pions capturés
         {
@@ -121,7 +121,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               for (size_t i = 1 ; i < compt ; i++)
               {
                 g[x + (pas_x - 1) * i][y + (pas_y - 1) * i] = coul ;
-                this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
+                rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
               }
             break ;
           }
@@ -134,7 +134,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
         {
           if (estVide(g[var_x][var_y]))
           {
-            this->majNbCoupsLicite(x, y, -1) ;
+            majNbCoupsLicite(var_x, var_y, -1) ;      // première petite erreur x au lieu de var_x
             g[var_x][var_y] = 3 ;
             break ;
           }
@@ -171,7 +171,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
       g[x][y] = 2 ;
     else
       g[x][y] = -1 ;
-    this->majNbCoupsLicite(x, y, +1) ;
+    majNbCoupsLicite(x, y, 1) ;
   }
 }
 
@@ -179,15 +179,15 @@ void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourn
 {
   g[x][y] = coul ;     // on place le pion joué
 
-  this->rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
-  this->rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)
+  rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
+  rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)
 
   for (size_t i = 0 ; i <= 7 ; i++)
   {
     for (size_t j = 0 ; j <= 7 ; j++)
     {
       if (g[i][j] == 3)
-        this->rayonnement(i, j, coul, 3) ;    // On update la licité des cases 3
+        rayonnement(i, j, coul, 3) ;    // On update la licité des cases 3
     }
   }
 }

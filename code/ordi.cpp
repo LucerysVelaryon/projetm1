@@ -21,7 +21,7 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 	else
 		nbCoupsPossibles = ma_grille.nbLiciteN;
 
-	int alea = round(nbCoupsPossibles*drand48()) ;		// donne un entier entre 0 et nbCoupsPossibles
+	int alea = arrondi(nbCoupsPossibles*drand48()) ;		// donne un entier entre 0 et nbCoupsPossibles
 	//int alea = floor(nbCoupsPossibles*drand48()) ;
 	int compt = 0;
 
