@@ -58,6 +58,26 @@ void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
 
+	cout << "blanc: " << endl ;
+	for (size_t i = 0 ; i < 8 ; i++)
+	{
+		for (size_t j = 0 ; j < 8 ; j++)
+		{
+			cout << ma_grille.g[i][j][1] << ' ' ;
+		}
+		cout << endl ;
+	}
+
+	cout << endl << "noir: " << endl ;
+	for (size_t i = 0 ; i < 8 ; i++)
+	{
+		for (size_t j = 0 ; j < 8 ; j++)
+		{
+			cout << ma_grille.g[i][j][2] << ' ' ;
+		}
+		cout << endl ;
+	}
+
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
 		for (size_t j = 0 ; j < 8 ; j++)

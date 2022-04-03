@@ -172,12 +172,12 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               if (coul == blanc)
               {
                 licite_noir = true ;
-                g[var_x][var_y][2] += compt ;
+                g[x][y][2] += compt - 1 ;
               }
               else
               {
                 licite_blanc = true ;
-                g[var_x][var_y][1] += compt ;
+                g[x][y][1] += compt - 1;
               }
               break ;
             }
