@@ -55,13 +55,13 @@ int main()
 	{
 		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nb_licites_n != 0))
 		{
-			grille_de_jeu.affichageJeu() ;
+			//grille_de_jeu.affichageJeu() ;
 			joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
 		}
 		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nb_licites_b != 0))
 		{
-			grille_de_jeu.affichageJeu() ;
+			//grille_de_jeu.affichageJeu() ;
 			joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
 		}
