@@ -33,9 +33,9 @@ void grille::init()
   for (size_t i = 0 ; i < 8 ; i++)
 		for (size_t j = 0 ; j < 8 ; j++)
     {
-			g[i][j][0] = -1 ;			// cases vides
-      nb_retourne_licite[i][j] = 0 ;
-      nb_retourne_licite[i][j] = 0 ;
+      g[i][j][0] = -1 ;			// cases vides
+      g[i][j][1] = 0 ;
+      g[i][j][2] = 0 ;
     }
 
 	g[3][3][0] = 11 ; g[4][4][0] = 11 ;			// pions init blancs
@@ -43,9 +43,10 @@ void grille::init()
 	g[2][4][0] = 1 ; g[3][5][0] = 1 ; g[5][3][0] = 1 ; g[4][2][0] = 1 ;			// cases licites blancs
 	g[2][3][0] = 2 ; g[3][2][0] = 2 ; g[5][4][0] = 2 ; g[4][5][0] = 2 ;			// cases licites noirs
 
-  numero_tour = 0 ;
   g[4][2][1] = 1 ; g[3][5][1] = 1 ; g[2][4][1] = 1 ; g[5][3][1] = 1 ;
   g[5][4][2] = 1 ; g[4][5][2] = 1 ; g[3][2][2] = 1 ; g[2][3][2] = 1 ;
+
+  numero_tour = 0 ;
   nb_licites_b = 4 ;
   nb_licites_n = 4 ;
 }
@@ -165,26 +166,25 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
             if (estVide(g[var_x][var_y][0]))
               break ;
-          }
 
-          else if (g[var_x][var_y][0] != coul)
-          {
-            if (coul == blanc)
+            else if (g[var_x][var_y][0] != coul)
             {
-              licite_noir = true ;
-              g[var_x][var_y][2] += compt ;
+              if (coul == blanc)
+              {
+                licite_noir = true ;
+                g[var_x][var_y][2] += compt ;
+              }
+              else
+              {
+                licite_blanc = true ;
+                g[var_x][var_y][1] += compt ;
+              }
+              break ;
             }
-            else
-            {
-              licite_blanc = true ;
-              g[var_x][var_y][1] += compt ;
-            }
-            break ;
           }
           var_x += (pas_x - 1) ;
           var_y += (pas_y - 1) ;
         }
-        cout << "var_x, var_y, compt: " << nb_retourne_licite_n[var_x][var_y] << ", " << nb_retourne_licite_n[var_x][var_y] << ' ' << compt << endl ;
       }
     }
   }
@@ -206,7 +206,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés et update la licité des cases vides concernées, pour une couleur donnée
 {
   this->majNbCoupsLicite(x, y, -1) ;
-  g[x][y][à] = coul ;                      // on place le pion joué
+  g[x][y][0] = coul ;                      // on place le pion joué
 
   this->rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
   this->rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)

@@ -47,14 +47,6 @@ void ordi_aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// 
 	fin_de_la_boucle: ;
 }
 
-
-class ordi_retourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
-{
-  public:
-    void choixCoups(grille, int*, int*) ;
-};
-
-
 class ordi_retourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
 {
   public:
@@ -62,7 +54,7 @@ class ordi_retourneMax	: public humain			// hérite de humain, choisit un coup q
 };
 
 void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
-{	
+{
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
 
@@ -72,7 +64,7 @@ void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		
 		{
 			if (licite(couleur, ma_grille.g[i][j][0]))
 			{
-				val = grilleRetourne[i][j][couleur/11] ;
+				val = ma_grille.g[i][j][couleur/11] ;
 				cout << "valeur testée" << val << endl ;
 				if (val > max)
 				{
@@ -87,4 +79,3 @@ void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		
 	*coup_y = ymax ;
 	cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
 }
-
