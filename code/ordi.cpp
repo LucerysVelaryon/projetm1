@@ -20,11 +20,11 @@ void ordi_aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// 
 		nbCoupsPossibles = ma_grille.nb_licites_b;
 	else
 		nbCoupsPossibles = ma_grille.nb_licites_n;
-	
+
   	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
 	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
 
-	cout << "alea: " << nbCoupsPossibles << ' ' << alea << endl;
+	cout << "coul " << couleur << " alea: " << nbCoupsPossibles << ' ' << alea << endl;
 
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
@@ -61,7 +61,7 @@ void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		
 		nbCoupsPossibles = ma_grille.nb_licites_b;
 	else
 		nbCoupsPossibles = ma_grille.nb_licites_n;
-	
+
   	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
 	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
 
@@ -87,5 +87,3 @@ void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		
 	}
 	fin_de_la_boucle: ;
 }
-
-

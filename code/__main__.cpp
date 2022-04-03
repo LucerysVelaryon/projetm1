@@ -23,7 +23,7 @@ string joueurs[nombre_joueurs] = {"humain"} ;
 
 int main()
 {
-	srand48(time(NULL)); 		//Inititialise la graine, pour l'aléatoire de l'ordi
+	srand(time(NULL)); 		//Inititialise la graine, pour l'aléatoire de l'ordi
 
 	int num_joueur1, num_joueur2 ;
 	grille grille_de_jeu ;
@@ -45,7 +45,7 @@ int main()
 	humain joueur2 ;
 	joueur2.init(blanc) ;*/
 
-	humain joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
+	ordi_aleatoire joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
 	ordi_aleatoire joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
@@ -68,6 +68,7 @@ int main()
 		grille_de_jeu.numero_tour++ ;
 	}
 	grille_de_jeu.affichageJeu() ;
+	grille_de_jeu.gagnant() ;
 
 	return 0 ;
 }

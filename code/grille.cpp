@@ -19,6 +19,8 @@ class grille {
 
     bool jeuFini() ;
 
+    void gagnant() ;
+
   private:
     void rayonnement(int x, int y, int coul, int methode) ;
 
@@ -36,6 +38,7 @@ void grille::init()
 	g[2][4] = 1 ; g[3][5] = 1 ; g[5][3] = 1 ; g[4][2] = 1 ;			// cases licites blancs
 	g[2][3] = 2 ; g[3][2] = 2 ; g[5][4] = 2 ; g[4][5] = 2 ;			// cases licites noirs
 
+  numero_tour = 0 ;
   nb_licites_b = 4 ;
   nb_licites_n = 4 ;
 }
@@ -108,54 +111,64 @@ void grille::rayonnement(int x, int y, int coul, int methode)
     {
       var_x = x ; var_y = y ; compt = 0 ;
 
-      while (dedans(var_x, var_y) && (pas_x != 1 || pas_y != 1))
+      if (pas_x != 1 || pas_y != 1)
       {
         var_x += (pas_x - 1) ;
         var_y += (pas_y - 1) ;
-        compt++ ;
 
-        if (methode == 1)     // retourner les pions capturés
+        while (dedans(var_x, var_y))
         {
-          if (g[var_x][var_y] == coul)
+          compt++ ;
+
+          if (methode == 1)     // retourner les pions capturés
           {
-              for (size_t i = 1 ; i < compt ; i++)
-              {
-                g[x + (pas_x - 1) * i][y + (pas_y - 1) * i] = coul ;
-                this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
-              }
-            break ;
+            if (g[var_x][var_y] == coul)
+            {
+                for (size_t i = 1 ; i < compt ; i++)
+                {
+                  if (dedans(x + (pas_x - 1) * i, y + (pas_y - 1) * i))
+                  {
+                    g[x + (pas_x - 1) * i][y + (pas_y - 1) * i] = coul ;
+                    this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
+                  }
+                }
+              break ;
+            }
+
+            else if (estVide(g[var_x][var_y]))
+              break ;
           }
 
-          else if (estVide(g[var_x][var_y]))
-            break ;
-        }
-
-        else if (methode == 2)      // cases vides à pointer
-        {
-          if (estVide(g[var_x][var_y]))
+          else if (methode == 2)      // cases vides à pointer
           {
-            this->majNbCoupsLicite(var_x, var_y, -1) ;     
-            g[var_x][var_y] = 3 ;
-            break ;
+            if (estVide(g[var_x][var_y]))
+            {
+              this->majNbCoupsLicite(var_x, var_y, -1) ;
+              g[var_x][var_y] = 3 ;
+              break ;
+            }
           }
-        }
 
-        else if (methode == 3)      // cases vides à vérifier
-        {
-          if (compt == 1)
-            coul = g[var_x][var_y] ;
-
-          if (estVide(g[var_x][var_y]))
-            break ;
-
-          else if (g[var_x][var_y] != coul)
+          else if (methode == 3)      // cases vides à vérifier
           {
-            if (coul == blanc)    
-              licite_noir = true ;
-            else
-              licite_blanc = true ;
-            break ;
+            if (compt == 1)
+              coul = g[var_x][var_y] ;
+
+            if (estVide(g[var_x][var_y]))
+              break ;
+
+            else if (g[var_x][var_y] != coul)
+            {
+              if (coul == blanc)
+                licite_noir = true ;
+              else
+                licite_blanc = true ;
+              break ;
+            }
           }
+
+          var_x += (pas_x - 1) ;
+          var_y += (pas_y - 1) ;
         }
       }
     }
@@ -177,7 +190,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
 void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés et update la licité des cases vides concernées, pour une couleur donnée
 {
-  this->majNbCoupsLicite(x, y, -1) ;       
+  this->majNbCoupsLicite(x, y, -1) ;
   g[x][y] = coul ;                      // on place le pion joué
 
   this->rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
@@ -209,4 +222,27 @@ void grille::majNbCoupsLicite(int x, int y, int pas)
     nb_licites_b += pas ;
   else if (g[x][y] == 2)
     nb_licites_n += pas ;
+}
+
+void grille::gagnant()
+{
+  int nb_noirs = 0 ; int nb_blancs = 0 ;
+
+  for (size_t i = 0 ; i <= 7 ; i++)
+  {
+    for (size_t j = 0 ; j <= 7 ; j++)
+    {
+      if (g[i][j] == blanc)
+        nb_blancs++ ;
+      else if (g[i][j] == noir)
+        nb_noirs++ ;
+    }
+  }
+
+  if (nb_noirs > nb_blancs)
+    cout << "Joueur Noir a gagné ! " << nb_noirs << " contre "  << nb_blancs << " pour Joueur Blanc" << endl ;
+  else if (nb_noirs < nb_blancs)
+    cout << "Joueur Blanc a gagné ! " << nb_blancs << " contre "  << nb_noirs << " pour Joueur Noir" << endl ;
+  else
+    cout << "Egalité ! " << nb_blancs << " partout !" << endl ;
 }
