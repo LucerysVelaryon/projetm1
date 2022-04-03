@@ -182,8 +182,9 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               break ;
             }
           }
-          var_x += (pas_x - 1) ;
-          var_y += (pas_y - 1) ;
+          
+            var_x += (pas_x - 1) ;
+            var_y += (pas_y - 1) ;
         }
       }
     }
