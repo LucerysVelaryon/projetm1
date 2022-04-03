@@ -45,8 +45,8 @@ int main()
 	humain joueur2 ;
 	joueur2.init(blanc) ;*/
 
-	humain joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
-	ordi_retourneMax joueur2 ;
+	ordiAleatoire joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
+	ordiRetourneMax joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
 

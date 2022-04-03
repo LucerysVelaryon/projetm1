@@ -24,7 +24,7 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// O
   	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
 	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
 
-	cout << "coul " << couleur << " alea: " << nbCoupsPossibles << ' ' << alea << endl;
+	cout << "couleur ordi: " << couleur << endl;
 
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
@@ -58,7 +58,7 @@ void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		/
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
 
-	cout << "blanc: " << endl ;
+	/*cout << "blanc: " << endl ;
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
 		for (size_t j = 0 ; j < 8 ; j++)
@@ -76,7 +76,7 @@ void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		/
 			cout << ma_grille.g[i][j][2] << ' ' ;
 		}
 		cout << endl ;
-	}
+	}*/
 
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
@@ -85,7 +85,6 @@ void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		/
 			if (licite(couleur, ma_grille.g[i][j][0]))
 			{
 				val = ma_grille.g[i][j][couleur/11] ;
-				cout << "valeur testée" << val << endl ;
 				if (val > max)
 				{
 					max = val ;
