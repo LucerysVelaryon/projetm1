@@ -20,16 +20,6 @@ bool estN(int i)			// case occupée par noir
 	return (i == 22) ;
 }
 
-bool liciteB(int i)			// test case licite blanc
-{
-	return (i == 0 || i == 1) ;
-}
-
-bool liciteN(int i)			// test case licite noir
-{
-	return (i == 0 || i == 2) ;
-}
-
 bool licite(int couleur, int i)
 {
 	if (couleur == blanc)

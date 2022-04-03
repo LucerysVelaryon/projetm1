@@ -36,7 +36,7 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 				{
 					*coup_x = i ;
 					*coup_y = j ;
-					cout << endl << *coup_x << ' ' << *coup_y << endl;
+					cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
 					goto fin_de_la_boucle;
 				}
 				else

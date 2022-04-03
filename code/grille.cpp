@@ -53,14 +53,14 @@ void grille::affichageJeu() const
       {
         if (numero_tour % 2 == 0)
         {
-          if (liciteN(g[i][j]))
+          if (licite(noir, g[i][j]))
             cout << 'O' << " | " ;
           else
             cout << ' ' << " | " ;
         }
         else if (numero_tour % 2 != 0)
         {
-          if (liciteB(g[i][j]))
+          if (licite(blanc, g[i][j]))
             cout << 'O' << " | " ;
           else
             cout << ' ' << " | " ;
