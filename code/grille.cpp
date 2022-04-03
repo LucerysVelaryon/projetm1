@@ -134,7 +134,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
         {
           if (estVide(g[var_x][var_y]))
           {
-            this->majNbCoupsLicite(var_x, var_y, -1) ;      // première petite erreur x au lieu de var_x
+            this->majNbCoupsLicite(var_x, var_y, -1) ;     
             g[var_x][var_y] = 3 ;
             break ;
           }
@@ -150,7 +150,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
           else if (g[var_x][var_y] != coul)
           {
-            if (coul == blanc)        // troisième et ultime erreur je l'espère
+            if (coul == blanc)    
               licite_noir = true ;
             else
               licite_blanc = true ;
@@ -177,8 +177,8 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
 void grille::retournerPlacer(int x, int y, int coul)     // fonction qui retourne les pions capturés et update la licité des cases vides concernées, pour une couleur donnée
 {
-  this->majNbCoupsLicite(x, y, -1) ;        // deuxième petite erreur : un oubli
-  g[x][y] = coul ;     // on place le pion joué
+  this->majNbCoupsLicite(x, y, -1) ;       
+  g[x][y] = coul ;                      // on place le pion joué
 
   this->rayonnement(x, y, coul, 1) ;    // On retourne les pions capturés et on marque les cases vides concernées comme "à vérifier" (=3)
   this->rayonnement(x, y, coul, 2) ;    // (cas particulier pour optimisé tps: marque les cases vides autour du pion placé)
