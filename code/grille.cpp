@@ -165,7 +165,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
             if (estVide(g[var_x][var_y]))
               break ;
-
+          }
           else if (g[var_x][var_y] != coul)
           {
             if (coul == blanc)        
@@ -179,9 +179,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               g[var_x][var_y][1] += compt ;
             }
             break ;
-            }
           }
-
           var_x += (pas_x - 1) ;
           var_y += (pas_y - 1) ;
         }

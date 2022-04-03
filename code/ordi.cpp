@@ -54,36 +54,37 @@ class ordi_retourneMax	: public humain			// hérite de humain, choisit un coup q
     void choixCoups(grille, int*, int*) ;
 };
 
-void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+
+class ordi_retourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
 {
-	int nbCoupsPossibles = 0 ;
-	if (couleur == blanc)
-		nbCoupsPossibles = ma_grille.nb_licites_b;
-	else
-		nbCoupsPossibles = ma_grille.nb_licites_n;
+  public:
+    void choixCoups(grille, int*, int*) ;
+};
 
-  	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
-	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
-
-	cout << "alea: " << nbCoupsPossibles << ' ' << alea << endl;
+void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+{	
+	int max = 0, xmax = 0, ymax = 0 ;
+	int val = 0 ;
 
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
 		for (size_t j = 0 ; j < 8 ; j++)
 		{
-			if (licite(couleur, ma_grille.g[i][j]))
+			if (licite(couleur, ma_grille.g[i][j][0]))
 			{
-				if (compt == alea)
+				val = grilleRetourne[i][j][couleur/11] ;
+				cout << "valeur testée" << val << endl ;
+				if (val > max)
 				{
-					*coup_x = i ;
-					*coup_y = j ;
-					cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
-					goto fin_de_la_boucle;
+					max = val ;
+					xmax = i ;
+					ymax = j ;
 				}
-				else
-					compt++ ;
 			}
 		}
 	}
-	fin_de_la_boucle: ;
+	*coup_x = xmax ;
+	*coup_y = ymax ;
+	cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
 }
+
