@@ -20,6 +20,7 @@ class grille {
     bool jeuFini() ;
 
   private:
+
     void rayonnement(int x, int y, int coul, int methode) ;
 
     void majNbCoupsLicite(int, int, int) ;
@@ -29,13 +30,19 @@ void grille::init()
 {
   for (size_t i = 0 ; i < 8 ; i++)
 		for (size_t j = 0 ; j < 8 ; j++)
+    {
 			g[i][j] = -1 ;			// cases vides
+      nb_retourne_licite[i][j] = 0 ;     
+      nb_retourne_licite[i][j] = 0 ;
+    }
 
 	g[3][3] = 11 ; g[4][4] = 11 ;			// pions init blancs
 	g[3][4] = 22 ; g[4][3] = 22 ;			// pions init noirs
 	g[2][4] = 1 ; g[3][5] = 1 ; g[5][3] = 1 ; g[4][2] = 1 ;			// cases licites blancs
 	g[2][3] = 2 ; g[3][2] = 2 ; g[5][4] = 2 ; g[4][5] = 2 ;			// cases licites noirs
 
+  g[4][2][1] = 1 ; g[3][5][1] = 1 ; g[2][4][1] = 1 ; g[5][3][1] = 1 ;
+  g[5][4][2] = 1 ; g[4][5][2] = 1 ; g[3][2][2] = 1 ; g[2][3][2] = 1 ;
   nb_licites_b = 4 ;
   nb_licites_n = 4 ;
 }
@@ -136,6 +143,8 @@ void grille::rayonnement(int x, int y, int coul, int methode)
           {
             this->majNbCoupsLicite(var_x, var_y, -1) ;     
             g[var_x][var_y] = 3 ;
+            g[var_x][var_y][1] = 0 ;
+            g[var_x][var_y][2] = 0 ;
             break ;
           }
         }
@@ -150,13 +159,20 @@ void grille::rayonnement(int x, int y, int coul, int methode)
 
           else if (g[var_x][var_y] != coul)
           {
-            if (coul == blanc)    
+            if (coul == blanc)        
+            {
               licite_noir = true ;
+              g[var_x][var_y][2] += compt ;
+            }
             else
+            {
               licite_blanc = true ;
+              g[var_x][var_y][1] += compt ;
+            }
             break ;
           }
         }
+        cout << "var_x, var_y, compt: " << nb_retourne_licite_n[var_x][var_y] << ", " << nb_retourne_licite_n[var_x][var_y] << ' ' << compt << endl ;
       }
     }
   }

@@ -10,7 +10,6 @@ class humain {
     void init(int) ;
 
     void choixCoups(grille, int*, int*) ;
-    //int getCouleur() const { return couleur; }        // utilité ?
 };
 
 void humain::init(int coul)
