@@ -10,6 +10,9 @@ class grille {
     int nb_licites_b ;    //nb coups jouables blanc
     int nb_licites_n ;    //nb coups jouables noir
 
+    int dernier_coup_x ;
+    int dernier_coup_y ;
+
     void init() ;
 
     void affichageJeu() const ;
@@ -38,6 +41,9 @@ void grille::init()
 
   nb_licites_b = 4 ;
   nb_licites_n = 4 ;
+  numero_tour = 0;
+  dernier_coup_x = 0 ;
+  dernier_coup_y = 0 ;
 }
 
 void grille::affichageJeu() const

@@ -50,20 +50,24 @@ int main()
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
 
-	int coup_x = 0, coup_y = 0 ;
+	cout << "test" << endl;
+	cout << grille_de_jeu.dernier_coup_x << endl;
+	grille_de_jeu.dernier_coup_x = 2 ;
+	cout << grille_de_jeu.dernier_coup_x << endl ;
+
 	while (!grille_de_jeu.jeuFini())
 	{
 		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nb_licites_n != 0))
 		{
 			grille_de_jeu.affichageJeu() ;
-			joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
+			joueur1.choixCoups(grille_de_jeu) ;
+			grille_de_jeu.retournerPlacer(grille_de_jeu.dernier_coup_x, grille_de_jeu.dernier_coup_y, joueur1.couleur) ;
 		}
 		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nb_licites_b != 0))
 		{
 			grille_de_jeu.affichageJeu() ;
-			joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
+			joueur2.choixCoups(grille_de_jeu) ;
+			grille_de_jeu.retournerPlacer(grille_de_jeu.dernier_coup_x, grille_de_jeu.dernier_coup_y, joueur2.couleur) ;
 		}
 		grille_de_jeu.numero_tour++ ;
 	}

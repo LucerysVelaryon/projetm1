@@ -10,17 +10,17 @@ using namespace std;
 class aleatoire	: public humain			// hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
 {
   public:
-    void choixCoups(grille, int*, int*) ;
+    void choixCoups(grille) ;
 };
 
-void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+void aleatoire::choixCoups(grille ma_grille) //(int* coup_x, int* coup_y)		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int nbCoupsPossibles = 0 ;
 	if (couleur == blanc)
 		nbCoupsPossibles = ma_grille.nb_licites_b;
 	else
 		nbCoupsPossibles = ma_grille.nb_licites_n;
-	
+
   	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
 	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
 
@@ -34,9 +34,9 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 			{
 				if (compt == alea)
 				{
-					*coup_x = i ;
-					*coup_y = j ;
-					cout << endl << *coup_x << ' ' << *coup_y << endl;
+					ma_grille.dernier_coup_x = i ;
+					ma_grille.dernier_coup_y = j ;
+					cout << endl << "L'ordi a joué en : " << ma_grille.dernier_coup_x << ' ' << ma_grille.dernier_coup_y << endl;
 					goto fin_de_la_boucle;
 				}
 				else
