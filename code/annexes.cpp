@@ -50,8 +50,3 @@ int changeCouleur(int couleur)
 	else
 		return noir ;
 }
-
-double arrondi(double value)
-{
-     return floor(value + 0.5);
-}

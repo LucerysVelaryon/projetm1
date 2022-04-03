@@ -20,10 +20,9 @@ void aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) //(int* c
 		nbCoupsPossibles = ma_grille.nb_licites_b;
 	else
 		nbCoupsPossibles = ma_grille.nb_licites_n;
-
-//	int alea = arrondi(nbCoupsPossibles*drand48()) ;		// donne un entier entre 0 et nbCoupsPossibles
-  int alea = floor(nbCoupsPossibles*drand48()) ;
-	int compt = 0;
+	
+  	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
+	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
 
 	cout << "alea: " << nbCoupsPossibles << ' ' << alea << endl;
 
