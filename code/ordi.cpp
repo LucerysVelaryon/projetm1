@@ -7,13 +7,13 @@
 using namespace std;
 
 
-class ordi_aleatoire	: public humain			// hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
+class ordiAleatoire	: public humain			// hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
 {
   public:
     void choixCoups(grille, int*, int*) ;
 };
 
-void ordi_aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int nbCoupsPossibles = 0 ;
 	if (couleur == blanc)
@@ -47,13 +47,13 @@ void ordi_aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// 
 	fin_de_la_boucle: ;
 }
 
-class ordi_retourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
+class ordiRetourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
 {
   public:
     void choixCoups(grille, int*, int*) ;
 };
 
-void ordi_retourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
