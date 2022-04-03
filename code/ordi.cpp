@@ -30,7 +30,7 @@ void ordi_aleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// 
 	{
 		for (size_t j = 0 ; j < 8 ; j++)
 		{
-			if (licite(couleur, ma_grille.g[i][j]))
+			if (licite(couleur, ma_grille.g[i][j][0]))
 			{
 				if (compt == alea)
 				{

@@ -28,7 +28,7 @@ void humain::choixCoups(grille ma_grille, int* coup_x, int* coup_y)		// On utlis
 	cout <<  "Entrer la position en y (colonne): " ;
 	cin >> *coup_y ;
 
-	if (!dedans(*coup_x, *coup_y) || !licite(couleur, ma_grille.g[*coup_x][*coup_y]))
+	if (!dedans(*coup_x, *coup_y) || !licite(couleur, ma_grille.g[*coup_x][*coup_y][0]))
 	{
 		cout << endl << "Coup non licite, veuillez rentrer à nouveau des coordonnées : \n" << endl ;
 		choixCoups(ma_grille, coup_x, coup_y) ;
