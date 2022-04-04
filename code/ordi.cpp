@@ -53,9 +53,16 @@ class ordiRetourneMax	: public humain			// hérite de humain, choisit un coup qu
 {
   public:
     void choixCoups(grille, int*, int*) ;
+
+    void meilleurCoups(grille, int*, int*) ;
 } ;
 
-void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
+{
+  meilleurCoups(ma_grille, coup_x, coup_y) ;
+}
+
+void ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
@@ -83,7 +90,7 @@ void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		/
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-class ordiMinMax : public humain
+class ordiMinMax : public ordiRetourneMax
 {
   public:
     void initProfondeur(int) ;
@@ -117,6 +124,7 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
     coul = changeCouleur(couleur) ;
 
   if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.nb_licites(coul) == 0)
+    meilleurCoups(nouvelle_grille, coup_x, coup_y) ;
     return nouvelle_grille.g[*coup_x][*coup_y][coul/11] ;
 
   int plus_haut_score ;
