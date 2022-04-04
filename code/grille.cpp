@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <fstream>
 
 using namespace std;
 
@@ -243,6 +244,7 @@ void grille::majNbCoupsLicite(int x, int y, int pas)
 void grille::gagnant()
 {
   int nb_noirs = 0 ; int nb_blancs = 0 ;
+  fstream fich;
 
   for (size_t i = 0 ; i <= 7 ; i++)
   {
@@ -254,6 +256,10 @@ void grille::gagnant()
         nb_noirs++ ;
     }
   }
+
+  fich.open("resultats.dat", ios::out);
+  fich << nb_noirs << " " << nb_blancs << endl;
+  fich.close();
 
   if (nb_noirs > nb_blancs)
     cout << "Joueur Noir a gagné ! " << nb_noirs << " contre "  << nb_blancs << " pour Joueur Blanc" << endl ;
