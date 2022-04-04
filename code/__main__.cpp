@@ -54,11 +54,11 @@ int main()
   	fstream fich ;
   	fich.open("resultats.dat", ios::out) ;
 
-  	int points_noir, points_blanc ;
+  	int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
 	for (int i=0; i<3; i++)
 	{
-		points_noir = 0 ; points_blanc = 0 ;
+		points_noir = 0 ; points_blanc = 0 ; 
 		grille_de_jeu.init() ;
 
 		int coup_x = 0, coup_y = 0 ;
@@ -79,8 +79,8 @@ int main()
 			grille_de_jeu.numero_tour++ ;
 		}
 		grille_de_jeu.affichageJeu() ;
-		grille_de_jeu.gagnant(&points_blanc, &points_noir) ;
-		fich << points_blanc << ' ' << points_noir << endl ;
+		grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
+		fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 	}
 
   	fich.close();
