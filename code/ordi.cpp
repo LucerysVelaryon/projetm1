@@ -47,11 +47,13 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// O
 	fin_de_la_boucle: ;
 }
 
+/* ---------------------------------------------------------------------------------------------------------------------------------------- */
+
 class ordiRetourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
 {
   public:
     void choixCoups(grille, int*, int*) ;
-};
+} ;
 
 void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {

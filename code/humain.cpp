@@ -3,7 +3,8 @@
 
 using namespace std;
 
-class humain {
+class humain
+{
   public:
     int couleur ;
 

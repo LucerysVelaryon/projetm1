@@ -3,7 +3,8 @@
 
 using namespace std;
 
-class grille {
+class grille
+{
   public:
     int g[8][8][3] ;      // dimension 2.1 = nombre de cases retournables blancs si joué ici ; dimension 2.2 = nombre de cases retournables noires si joué ici
     int numero_tour ;
@@ -182,7 +183,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
               break ;
             }
           }
-          
+
             var_x += (pas_x - 1) ;
             var_y += (pas_y - 1) ;
         }
