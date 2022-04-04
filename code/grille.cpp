@@ -22,6 +22,8 @@ class grille
 
     void gagnant(int*, int*, int*) ;
 
+    int nb_licites(int) ;
+
   private:
 
     void rayonnement(int x, int y, int coul, int methode) ;
@@ -269,4 +271,12 @@ void grille::gagnant(int* nb_blancs, int* nb_noirs, int* gagnant)
     cout << "Egalité ! " << *nb_blancs << " partout !" << endl ;
     *gagnant = 0 ;
   }
+}
+
+int grille::nb_licites(int coul)
+{
+  if (coul == blanc)
+    return nb_licites_b ;
+  else
+    return nb_licites_n ;
 }

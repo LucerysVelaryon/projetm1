@@ -47,16 +47,17 @@ int main()
 	joueur2.init(blanc) ;*/
 
 	ordiAleatoire joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
-	ordiRetourneMax joueur2 ;
+	ordiMinMax joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
+	joueur2.initProfondeur(3) ;
 
   fstream fich ;
   fich.open("resultats.dat", ios::out) ;
 
   int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
-	for (size_t i = 0 ; i < 3 ; i++)
+	for (size_t i = 0 ; i < 1 ; i++)
 	{
 		points_noir = 0 ; points_blanc = 0 ;
 		grille_de_jeu.init() ;
@@ -66,13 +67,13 @@ int main()
 		{
 			if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nb_licites_n != 0))
 			{
-				//grille_de_jeu.affichageJeu() ;
+				grille_de_jeu.affichageJeu() ;
 				joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
 			}
 			else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nb_licites_b != 0))
 			{
-				//grille_de_jeu.affichageJeu() ;
+				grille_de_jeu.affichageJeu() ;
 				joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
 			}
