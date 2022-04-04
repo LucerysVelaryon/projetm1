@@ -1,5 +1,6 @@
 #include <iostream>     // entree/sorties
 #include <math.h>
+#include <fstream>
 
 using namespace std ;
 
@@ -20,31 +21,6 @@ string joueurs[nombre_joueurs] = {"humain"} ;
 //type classes[nombre_joueurs] = {humain} ;
 
 // éxecution du programme final en C++
-
-void partie(grille grille_de_jeu)
-{
-	grille_de_jeu.init() ;
-
-	int coup_x = 0, coup_y = 0 ;
-	while (!grille_de_jeu.jeuFini())
-	{
-		if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nb_licites_n != 0))
-		{
-			grille_de_jeu.affichageJeu() ;
-			joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
-		}
-		else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nb_licites_b != 0))
-		{
-			grille_de_jeu.affichageJeu() ;
-			joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-			grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
-		}
-		grille_de_jeu.numero_tour++ ;
-	}
-	grille_de_jeu.affichageJeu() ;
-	grille_de_jeu.gagnant() ;
-}
 
 
 int main()
@@ -75,8 +51,39 @@ int main()
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
 
+  	fstream fich ;
+  	fich.open("resultats.dat", ios::out) ;
+
+  	int points_noir, points_blanc ;
+
 	for (int i=0; i<3; i++)
-		partie(grille_de_jeu) ;
+	{
+		points_noir = 0 ; points_blanc = 0 ;
+		grille_de_jeu.init() ;
+
+		int coup_x = 0, coup_y = 0 ;
+		while (!grille_de_jeu.jeuFini())
+		{
+			if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nb_licites_n != 0))
+			{
+				//grille_de_jeu.affichageJeu() ;
+				joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
+			}
+			else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nb_licites_b != 0))
+			{
+				//grille_de_jeu.affichageJeu() ;
+				joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
+			}
+			grille_de_jeu.numero_tour++ ;
+		}
+		grille_de_jeu.affichageJeu() ;
+		grille_de_jeu.gagnant(&points_blanc, &points_noir) ;
+		fich << points_blanc << ' ' << points_noir << endl ;
+	}
+
+  	fich.close();
 
 	return 0 ;
 }

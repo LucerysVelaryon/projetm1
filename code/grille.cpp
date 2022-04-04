@@ -1,6 +1,5 @@
 #include <iostream>
 #include <math.h>
-#include <fstream>
 
 using namespace std;
 
@@ -20,7 +19,7 @@ class grille {
 
     bool jeuFini() ;
 
-    void gagnant() ;
+    void gagnant(int*, int*) ;
 
   private:
 
@@ -241,30 +240,23 @@ void grille::majNbCoupsLicite(int x, int y, int pas)
     nb_licites_n += pas ;
 }
 
-void grille::gagnant()
+void grille::gagnant(int* nb_blancs, int* nb_noirs)
 {
-  int nb_noirs = 0 ; int nb_blancs = 0 ;
-  fstream fich;
-
   for (size_t i = 0 ; i <= 7 ; i++)
   {
     for (size_t j = 0 ; j <= 7 ; j++)
     {
       if (g[i][j][0] == blanc)
-        nb_blancs++ ;
+        *nb_blancs += 1 ;
       else if (g[i][j][0] == noir)
-        nb_noirs++ ;
+        *nb_noirs += 1 ;
     }
   }
 
-  fich.open("resultats.dat", ios::out);
-  fich << nb_noirs << " " << nb_blancs << endl;
-  fich.close();
-
-  if (nb_noirs > nb_blancs)
-    cout << "Joueur Noir a gagné ! " << nb_noirs << " contre "  << nb_blancs << " pour Joueur Blanc" << endl ;
-  else if (nb_noirs < nb_blancs)
-    cout << "Joueur Blanc a gagné ! " << nb_blancs << " contre "  << nb_noirs << " pour Joueur Noir" << endl ;
+  if (*nb_noirs > *nb_blancs)
+    cout << "Joueur Noir a gagné ! " << *nb_noirs << " contre "  << *nb_blancs << " pour Joueur Blanc" << endl ;
+  else if (*nb_noirs < *nb_blancs)
+    cout << "Joueur Blanc a gagné ! " << *nb_blancs << " contre "  << *nb_noirs << " pour Joueur Noir" << endl ;
   else
-    cout << "Egalité ! " << nb_blancs << " partout !" << endl ;
+    cout << "Egalité ! " << *nb_blancs << " partout !" << endl ;
 }
