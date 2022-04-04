@@ -124,8 +124,10 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
     coul = changeCouleur(couleur) ;
 
   if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.nb_licites(coul) == 0)
-    meilleurCoups(nouvelle_grille, coup_x, coup_y) ;
+  {
+    this->meilleurCoups(nouvelle_grille, coup_x, coup_y) ;
     return nouvelle_grille.g[*coup_x][*coup_y][coul/11] ;
+  }
 
   int plus_haut_score ;
 
