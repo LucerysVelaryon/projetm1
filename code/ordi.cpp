@@ -53,9 +53,16 @@ class ordiRetourneMax	: public humain			// hérite de humain, choisit un coup qu
 {
   public:
     void choixCoups(grille, int*, int*) ;
+
+    void meilleurCoups(grille, int*, int*) ;
 } ;
 
-void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
+{
+  meilleurCoups(ma_grille, coup_x, coup_y) ;
+}
+
+void ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
@@ -79,4 +86,98 @@ void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 		/
 	*coup_x = xmax ;
 	*coup_y = ymax ;
 	//cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+class ordiMinMax : public ordiRetourneMax
+{
+  public:
+    void initProfondeur(int) ;
+
+    void choixCoups(grille, int*, int*) ;
+
+  private:
+    int profondeur_max ;
+
+    int fonctionMinMax(grille, int, int*, int*) ;
+} ;
+
+void ordiMinMax::initProfondeur(int prof)
+{
+  profondeur_max = prof ;
+}
+
+void ordiMinMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
+{
+  int meilleur_coup = fonctionMinMax(ma_grille, profondeur_max, coup_x, coup_y) ;
+}
+
+int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, int* coup_y)
+{
+  grille nouvelle_grille = ma_grille ;
+  int coul ;
+
+  if ((profondeur_max - profondeur) % 2 == 0)
+    coul = couleur ;
+  else
+    coul = changeCouleur(couleur) ;
+
+  if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.nb_licites(coul) == 0)
+  {
+    this->meilleurCoups(nouvelle_grille, coup_x, coup_y) ;
+    return nouvelle_grille.g[*coup_x][*coup_y][coul/11] ;
+  }
+
+  int plus_haut_score ;
+
+  if ((nouvelle_grille.numero_tour % 2 == 0))
+  {
+    plus_haut_score = -2147483648 ;
+
+    for (size_t i = 0 ; i < 8 ; i++)
+  	{
+  		for (size_t j = 0 ; j < 8 ; j++)
+  		{
+  			if (licite(coul, nouvelle_grille.g[i][j][0]))
+  			{
+  				nouvelle_grille.retournerPlacer(i, j, coul) ;
+          int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
+          nouvelle_grille = ma_grille ;
+          if (score > plus_haut_score)
+          {
+            plus_haut_score = score ;
+            *coup_x = i ;
+            *coup_y = j ;
+          }
+  			}
+  		}
+  	}
+  }
+
+  else
+  {
+    plus_haut_score = + 2147483647 ;
+
+    for (size_t i = 0 ; i < 8 ; i++)
+  	{
+  		for (size_t j = 0 ; j < 8 ; j++)
+  		{
+  			if (licite(coul, nouvelle_grille.g[i][j][0]))
+  			{
+  				nouvelle_grille.retournerPlacer(i, j, coul) ;
+          int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
+          nouvelle_grille = ma_grille ;
+          if (score < plus_haut_score)
+          {
+            plus_haut_score = score ;
+            *coup_x = i ;
+            *coup_y = j ;
+          }
+  			}
+  		}
+    }
+  }
+
+  return plus_haut_score ;
 }
