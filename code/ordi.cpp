@@ -24,7 +24,7 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// O
   	int alea = rand() % nbCoupsPossibles + 1;		// donne un entier entre 1 et nbCoupsPossibles
 	int compt = 1;									// on numérote les coups possibles de 1 à nbCoupsPossibles
 
-//	cout << "couleur ordi: " << couleur << endl;
+	//	cout << "couleur ordi: " << couleur << endl;
 
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
