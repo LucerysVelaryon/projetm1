@@ -11,9 +11,10 @@ class ordiAleatoire	: public humain			// hérite de humain, choisit un coup alé
 {
   public:
     void choixCoups(grille, int*, int*) ;
+    void init(int) ;
 };
 
-void ordiAleatoire::init(int couleur)
+void ordiAleatoire::init(int coul)
 {
 	couleur = coul ;
 	srand(time(NULL)); 		//Inititialise la graine, pour l'aléatoire de l'ordi
