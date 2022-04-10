@@ -13,6 +13,12 @@ class ordiAleatoire	: public humain			// hérite de humain, choisit un coup alé
     void choixCoups(grille, int*, int*) ;
 };
 
+void ordiAleatoire::init(int couleur)
+{
+	couleur = coul ;
+	srand(time(NULL)); 		//Inititialise la graine, pour l'aléatoire de l'ordi
+}
+
 void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int nbCoupsPossibles = 0 ;
