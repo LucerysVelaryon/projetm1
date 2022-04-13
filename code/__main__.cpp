@@ -1,20 +1,19 @@
 #include <iostream>     // entree/sorties
 #include <math.h>
 #include <fstream>
+#include "classes.h"
 
 using namespace std ;
 
 // déclaration des variables globales
 
-int noir = 22 ;
-int blanc = 11 ;
+extern int blanc ;
+extern int noir ;
 
 // inclusion des classes et fonctions
 
-#include "annexes.cpp"			// fonctions					// On a un pb de double inclusion de fichier car grille et annexes sont dans ordi
-#include "grille.cpp"				// classe
-#include "humain.cpp"				// classe
-#include "ordi.cpp"					// classe
+//#include "annexes.cpp"			// fonctions					// On a un pb de double inclusion de fichier car grille et annexes sont dans ordi
+				// classe
 
 const int nombre_joueurs = 1 ;
 string joueurs[nombre_joueurs] = {"humain"} ;

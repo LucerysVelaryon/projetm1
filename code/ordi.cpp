@@ -3,16 +3,12 @@
 #include <stdlib.h>   // nb Aléatoires
 #include <time.h>     // pour avoir un point de départ différent à chaque fois
 
+//#include "grille.h"
 
 using namespace std;
 
 
-class ordiAleatoire	: public humain			// hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
-{
-  public:
-    void choixCoups(grille, int*, int*) ;
-    void init(int) ;
-};
+
 
 void ordiAleatoire::init(int coul)
 {
@@ -56,13 +52,7 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y) 	// O
 
 /* ---------------------------------------------------------------------------------------------------------------------------------------- */
 
-class ordiRetourneMax	: public humain			// hérite de humain, choisit un coup qui retourne un max de pions adverses
-{
-  public:
-    void choixCoups(grille, int*, int*) ;
 
-    int meilleurCoups(grille, int*, int*, bool) ;
-} ;
 
 void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {
@@ -102,18 +92,6 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, b
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
 
-class ordiMinMax : public ordiRetourneMax
-{
-  public:
-    void initProfondeur(int) ;
-
-    void choixCoups(grille, int*, int*) ;
-
-  private:
-    int profondeur_max ;
-
-    int fonctionMinMax(grille, int, int*, int*) ;
-} ;
 
 void ordiMinMax::initProfondeur(int prof)
 {

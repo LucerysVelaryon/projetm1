@@ -1,7 +1,11 @@
 #include <iostream>			// entrée/sorties
 #include <math.h>
+#include "classes.h"
 
 using namespace std ;
+
+int blanc = 11 ;
+int noir = 22 ;
 
 // fonctions simples et utiles partout, permettent une meilleure lisibilité du programme
 
