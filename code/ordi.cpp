@@ -168,7 +168,7 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 
   int plus_haut_score ;
 
-  if ((nouvelle_grille.numero_tour % 2 == 0))
+  if ((profondeur_max - profondeur) % 2 == 0)
   {
     plus_haut_score = -2147483648 ;
 
