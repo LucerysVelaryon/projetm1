@@ -49,7 +49,7 @@ int main()
 	ordiMinMax joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
-	joueur2.initProfondeur(4) ;
+	joueur2.initProfondeur(1) ;
 
 	fstream fich ;
 	fich.open("resultats.dat", ios::out) ;

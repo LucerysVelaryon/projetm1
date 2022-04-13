@@ -61,26 +61,30 @@ class ordiRetourneMax	: public humain			// hérite de humain, choisit un coup qu
   public:
     void choixCoups(grille, int*, int*) ;
 
-    void meilleurCoups(grille, int*, int*) ;
+    int meilleurCoups(grille, int*, int*, bool) ;
 } ;
 
 void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {
-  meilleurCoups(ma_grille, coup_x, coup_y) ;
+  int score = meilleurCoups(ma_grille, coup_x, coup_y, false) ;
 }
 
-void ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, bool couleur_joueur) 		// On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
 	int max = 0, xmax = 0, ymax = 0 ;
 	int val = 0 ;
+
+  int coul = couleur ;
+  if (couleur_joueur)
+    coul = changeCouleur(coul) ;
 
 	for (size_t i = 0 ; i < 8 ; i++)
 	{
 		for (size_t j = 0 ; j < 8 ; j++)
 		{
-			if (licite(couleur, ma_grille.g[i][j][0]))
+			if (licite(coul, ma_grille.g[i][j][0]))
 			{
-				val = ma_grille.g[i][j][couleur/11] ;
+				val = ma_grille.g[i][j][coul/11] ;
 				if (val > max)
 				{
 					max = val ;
@@ -92,6 +96,7 @@ void ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y) 
 	}
 	*coup_x = xmax ;
 	*coup_y = ymax ;
+  return max ;
 	//cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
 }
 
@@ -117,12 +122,14 @@ void ordiMinMax::initProfondeur(int prof)
 
 void ordiMinMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {
-  int meilleur_coup = fonctionMinMax(ma_grille, profondeur_max, coup_x, coup_y) ;
+  int* point_x ; int* point_y ;
+  int score = fonctionMinMax(ma_grille, profondeur_max, coup_x, coup_y) ;
 }
 
 int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, int* coup_y)
 {
   grille nouvelle_grille = ma_grille ;
+  int var_x ; int var_y ;
   int coul ;
 
   if ((profondeur_max - profondeur) % 2 == 0)
@@ -132,13 +139,12 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 
   if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.nb_licites(coul) == 0)
   {
-    this->meilleurCoups(nouvelle_grille, coup_x, coup_y) ;
-    return nouvelle_grille.g[*coup_x][*coup_y][coul/11] ;
+    return this->meilleurCoups(nouvelle_grille, coup_x, coup_y, (coul != couleur)) ;
   }
 
   int plus_haut_score ;
 
-  if ((nouvelle_grille.numero_tour % 2 == 0))
+  if ((profondeur_max - profondeur) % 2 == 0)
   {
     plus_haut_score = -2147483648 ;
 
@@ -154,12 +160,18 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
           if (score > plus_haut_score)
           {
             plus_haut_score = score ;
-            *coup_x = i ;
-            *coup_y = j ;
+            var_x = i ;
+            var_y = j ;
           }
   			}
   		}
   	}
+
+    if (profondeur == profondeur_max)
+    {
+      *coup_x = var_x ;
+      *coup_y = var_y ;
+    }
   }
 
   else
@@ -178,8 +190,8 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
           if (score < plus_haut_score)
           {
             plus_haut_score = score ;
-            *coup_x = i ;
-            *coup_y = j ;
+            var_x = i ;
+            var_y = j ;
           }
   			}
   		}
