@@ -4,8 +4,8 @@
 
 using namespace std ;
 
-int blanc = 11 ;
-int noir = 22 ;
+extern int blanc ;
+extern int noir ;
 
 // fonctions simples et utiles partout, permettent une meilleure lisibilité du programme
 
