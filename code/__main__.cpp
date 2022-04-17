@@ -41,17 +41,17 @@ int main()
 	joueur2.init(blanc) ;*/
 
 	ordiAleatoire joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
-	ordiMinMax joueur2 ;
+	ordiAleatoire joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
-	joueur2.initProfondeur(1) ;
+	//joueur2.initProfondeur(1) ;
 
 	fstream fich ;
 	fich.open("resultats.dat", ios::out) ;
 
 	int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
-	for (size_t i = 0 ; i < 1 ; i++)								// Nombre de parties
+	for (size_t i = 0 ; i < 10000 ; i++)								// Nombre de parties
 	{
 		points_noir = 0 ; points_blanc = 0 ;						
 		grille_de_jeu.init() ;
