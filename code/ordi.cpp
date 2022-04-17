@@ -147,20 +147,20 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
   		{
   			if (licite(coul, nouvelle_grille.g[i][j][0]))
   			{
-  				nouvelle_grille.retournerPlacer(i, j, coul) ;
-          int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
-          nouvelle_grille = ma_grille ;
-          if (score > plus_haut_score)
-          {
-            plus_haut_score = score ;
-            var_x = i ;
-            var_y = j ;
-          }
+  				  nouvelle_grille.retournerPlacer(i, j, coul) ;
+		          int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
+		          nouvelle_grille = ma_grille ;
+		          if (score > plus_haut_score)
+		          {
+		            plus_haut_score = score ;
+		            var_x = i ;
+		            var_y = j ;
+		          }
   			}
   		}
   	}
 
-    if (profondeur == profondeur_max)
+    if (profondeur == profondeur_max - 1)
     {
       *coup_x = var_x ;
       *coup_y = var_y ;
@@ -177,15 +177,15 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
   		{
   			if (licite(coul, nouvelle_grille.g[i][j][0]))
   			{
-  				nouvelle_grille.retournerPlacer(i, j, coul) ;
-          int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
-          nouvelle_grille = ma_grille ;
-          if (score < plus_haut_score)
-          {
-            plus_haut_score = score ;
-            var_x = i ;
-            var_y = j ;
-          }
+  				  nouvelle_grille.retournerPlacer(i, j, coul) ;
+		          int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
+		          nouvelle_grille = ma_grille ;
+		          if (score < plus_haut_score)
+		          {
+		            plus_haut_score = score ;
+		            var_x = i ;
+		            var_y = j ;
+		          }
   			}
   		}
     }
