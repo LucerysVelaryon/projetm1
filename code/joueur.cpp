@@ -49,7 +49,7 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y)  // O
   else
     nbCoupsPossibles = ma_grille.nb_licites_n;
 
-    int alea = rand() % nbCoupsPossibles + 1;   // donne un entier entre 1 et nbCoupsPossibles
+  int alea = rand() % nbCoupsPossibles + 1;   // donne un entier entre 1 et nbCoupsPossibles
   int compt = 1;                  // on numérote les coups possibles de 1 à nbCoupsPossibles
 
   //  cout << "couleur ordi: " << couleur << endl;
@@ -79,7 +79,7 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y)  // O
 
 void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {
-  int score = meilleurCoups(ma_grille, coup_x, coup_y, false) ;
+  meilleurCoups(ma_grille, coup_x, coup_y, false) ;
 }
 
 int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, bool couleur_joueur)     // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
@@ -122,8 +122,7 @@ void ordiMinMax::initProfondeur(int prof)
 
 void ordiMinMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {
-  int* point_x ; int* point_y ;
-  int score = fonctionMinMax(ma_grille, profondeur_max, coup_x, coup_y) ;
+  fonctionMinMax(ma_grille, profondeur_max, coup_x, coup_y) ;
 }
 
 int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, int* coup_y)

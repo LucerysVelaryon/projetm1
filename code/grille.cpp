@@ -114,7 +114,7 @@ void grille::rayonnement(int x, int y, int coul, int methode)
           {
             if (g[var_x][var_y][0] == coul)
             {
-                for (size_t i = 1 ; i < compt ; i++)
+                for (size_t i = 1 ; i < unsigned(compt) ; i++)
                 {
                   if (dedans(x + (pas_x - 1) * i, y + (pas_y - 1) * i))
                   {
