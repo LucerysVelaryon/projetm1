@@ -1,11 +1,11 @@
-SOURCES=code/__main__.cpp code/annexes.cpp code/grille.cpp code/joueur.cpp
+SOURCES = code/__main__.cpp code/annexes.cpp code/grille.cpp code/joueur.cpp
 
-CXX=g++
-LDFLAGS=-std=c++11 -Wall -Wextra
-CPPFLAGS=-std=c++11 -Wall -Wextra -Wno-ignored-attributes
-LDLIBS=
+CXX = g++
+LDFLAGS = -std=c++11 -Wall -Wextra
+CPPFLAGS = -std=c++11 -Wall -Wextra -Wno-ignored-attributes
+LDLIBS =
 
-OBJETS=$(subst .cpp,.o,$(SOURCES))
+OBJETS = $(subst .cpp,.o,$(SOURCES))
 
 all: build
 
@@ -16,12 +16,13 @@ depend: .depend
 
 .depend: $(SOURCES)
 	rm -f ./code/.depend
-	$(CXX) $(CPPFLAGS) -MM $^>>./code/.depend;
+	$(CXX) $(CPPFLAGS) -MM $^>>./code/.depend ;
 
 clean:
 	rm $(OBJETS)
 
-dist-clean: clean
-	rm -f *~ code/.depend
+dist-clean: build clean
+	rm -f *~ code/.depend 
+	rm Othello 
 
 include .depend
