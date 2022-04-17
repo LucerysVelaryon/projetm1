@@ -41,7 +41,8 @@ int main()
 	joueur2.init(blanc) ;*/
 
 	ordiAleatoire joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
-	ordiAleatoire joueur2 ;
+	//ordiMinMax joueur2 ;
+	ordiRetourneMax joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
 	//joueur2.initProfondeur(1) ;
@@ -60,13 +61,13 @@ int main()
 		{
 			if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
 			{
-				grille_de_jeu.affichageJeu() ;
+				//grille_de_jeu.affichageJeu() ;
 				joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.recupCouleur()) ;
 			}
 			else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
 			{
-				grille_de_jeu.affichageJeu() ;
+				//grille_de_jeu.affichageJeu() ;
 				joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
 				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.recupCouleur()) ;
 			}
