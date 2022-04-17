@@ -58,19 +58,19 @@ int main()
 		int coup_x = 0, coup_y = 0 ;
 		while (!grille_de_jeu.jeuFini())
 		{
-			if ((grille_de_jeu.numero_tour % 2 == 0) && (grille_de_jeu.nb_licites_n != 0))
+			if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
 			{
 				grille_de_jeu.affichageJeu() ;
 				joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.couleur) ;
+				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.recupCouleur()) ;
 			}
-			else if ((grille_de_jeu.numero_tour % 2 != 0) && (grille_de_jeu.nb_licites_b != 0))
+			else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
 			{
 				grille_de_jeu.affichageJeu() ;
 				joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.couleur) ;
+				grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.recupCouleur()) ;
 			}
-			grille_de_jeu.numero_tour++ ;
+			grille_de_jeu.incrementNumeroTour() ;
 		}
 		//grille_de_jeu.affichageJeu() ;
 		grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;

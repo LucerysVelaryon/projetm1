@@ -15,6 +15,11 @@ void humain::init(int coul)
   couleur = coul ;
 }
 
+int humain::recupCouleur()
+{
+  return couleur ;
+}
+
 void humain::choixCoups(grille ma_grille, int* coup_x, int* coup_y)   // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {                                   // On rajoute un argument qui sert à rien pour avoir la même structure que ordi::choixCoups
   if (couleur == blanc)
@@ -43,35 +48,23 @@ void ordiAleatoire::init(int coul)
 
 void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y)  // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
-  int nbCoupsPossibles = 0 ;
-  if (couleur == blanc)
-    nbCoupsPossibles = ma_grille.nb_licites_b;
-  else
-    nbCoupsPossibles = ma_grille.nb_licites_n;
-
+  int nbCoupsPossibles = ma_grille.recupNbLicites(couleur) ;
   int alea = rand() % nbCoupsPossibles + 1;   // donne un entier entre 1 et nbCoupsPossibles
   int compt = 1;                  // on numérote les coups possibles de 1 à nbCoupsPossibles
 
-  //  cout << "couleur ordi: " << couleur << endl;
-
   for (size_t i = 0 ; i < 8 ; i++)
-  {
     for (size_t j = 0 ; j < 8 ; j++)
-    {
       if (licite(couleur, ma_grille.g[i][j][0]))
       {
         if (compt == alea)
         {
           *coup_x = i ;
           *coup_y = j ;
-        //  cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
           goto fin_de_la_boucle;
         }
         else
           compt++ ;
       }
-    }
-  }
   fin_de_la_boucle: ;
 }
 
@@ -92,9 +85,7 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, b
     coul = changeCouleur(coul) ;
 
   for (size_t i = 0 ; i < 8 ; i++)
-  {
     for (size_t j = 0 ; j < 8 ; j++)
-    {
       if (licite(coul, ma_grille.g[i][j][0]))
       {
         val = ma_grille.g[i][j][coul/11] ;
@@ -105,12 +96,9 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, b
           ymax = j ;
         }
       }
-    }
-  }
   *coup_x = xmax ;
   *coup_y = ymax ;
   return max ;
-  //cout << endl << "L'ordi a joué en : " << *coup_x << ' ' << *coup_y << endl;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
@@ -136,7 +124,7 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
   else
     coul = changeCouleur(couleur) ;
 
-  if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.nb_licites(coul) == 0)
+  if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.recupNbLicites(coul) == 0)
   {
     return this->meilleurCoups(nouvelle_grille, coup_x, coup_y, (coul != couleur)) ;
   }
@@ -148,9 +136,7 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
     plus_haut_score = -2147483648 ;
 
     for (size_t i = 0 ; i < 8 ; i++)
-    {
       for (size_t j = 0 ; j < 8 ; j++)
-      {
         if (licite(coul, nouvelle_grille.g[i][j][0]))
         {
           nouvelle_grille.retournerPlacer(i, j, coul) ;
@@ -163,8 +149,6 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
             var_y = j ;
           }
         }
-      }
-    }
 
     if (profondeur == profondeur_max)
     {
@@ -178,9 +162,7 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
     plus_haut_score = + 2147483647 ;
 
     for (size_t i = 0 ; i < 8 ; i++)
-    {
       for (size_t j = 0 ; j < 8 ; j++)
-      {
         if (licite(coul, nouvelle_grille.g[i][j][0]))
         {
           nouvelle_grille.retournerPlacer(i, j, coul) ;
@@ -193,8 +175,6 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
             var_y = j ;
           }
         }
-      }
-    }
   }
 
   return plus_haut_score ;

@@ -114,14 +114,14 @@ void grille::rayonnement(int x, int y, int coul, int methode)
           {
             if (g[var_x][var_y][0] == coul)
             {
-                for (size_t i = 1 ; i < unsigned(compt) ; i++)
+              for (size_t i = 1 ; i < unsigned(compt) ; i++)
+              {
+                if (dedans(x + (pas_x - 1) * i, y + (pas_y - 1) * i))
                 {
-                  if (dedans(x + (pas_x - 1) * i, y + (pas_y - 1) * i))
-                  {
-                    g[x + (pas_x - 1) * i][y + (pas_y - 1) * i][0] = coul ;
-                    this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
-                  }
+                  g[x + (pas_x - 1) * i][y + (pas_y - 1) * i][0] = coul ;
+                  this->rayonnement(x + (pas_x - 1) * i, y + (pas_y - 1) * i, coul, 2) ;
                 }
+              }
               break ;
             }
 
@@ -252,10 +252,20 @@ void grille::gagnant(int* nb_blancs, int* nb_noirs, int* gagnant)
   }
 }
 
-int grille::nb_licites(int coul)
+int grille::recupNbLicites(int coul)
 {
   if (coul == blanc)
     return nb_licites_b ;
   else
     return nb_licites_n ;
+}
+
+int grille::recupNumeroTour()
+{
+  return numero_tour ;
+}
+
+void grille::incrementNumeroTour() 
+{
+  numero_tour++ ;
 }
