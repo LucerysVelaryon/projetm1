@@ -1,4 +1,4 @@
-SOURCES=
+SOURCES=code/__main__.cpp code/annexes.cpp code/grille.cpp code/joueur.cpp
 
 CXX=g++
 LDFLAGS=-std=c++11 -Wall -Wextra
@@ -10,18 +10,18 @@ OBJETS=$(subst .cpp,.o,$(SOURCES))
 all: build
 
 build: $(OBJETS)
-	$(CXX) $(LDFLAGS) -o run $(OBJETS) $(LDLIBS)
+	$(CXX) $(LDFLAGS) -o Othello $(OBJETS) $(LDLIBS)
 
 depend: .depend
 
 .depend: $(SOURCES)
-	rm -f ./.depend
-	$(CXX) $(CPPFLAGS) -MM $^>>./.depend;
+	rm -f ./code/.depend
+	$(CXX) $(CPPFLAGS) -MM $^>>./code/.depend;
 
 clean:
 	rm $(OBJETS)
 
 dist-clean: clean
-	rm -f *~ .depend
+	rm -f *~ code/.depend
 
 include .depend
