@@ -8,8 +8,8 @@ using namespace std ;
 
 // déclaration des variables globales
 
-int blanc = 22 ;
-int noir = 11 ;
+int blanc = 11 ;
+int noir = 22 ;
 
 const int nombre_joueurs = 1 ;
 string joueurs[nombre_joueurs] = {"humain"} ;
