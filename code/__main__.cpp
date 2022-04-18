@@ -41,18 +41,15 @@ int main()
 	joueur2.init(blanc) ;*/
 
 	fstream fich ;
-	fich.open("data/MinMax_prof2.dat", ios::out) ;
+	fich.open("data/MinMax_prof3.dat", ios::out) ;
 
 	int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
-
 /*
 	ordiAleatoire joueur1 ;											
-	ordiMinMax joueur2 ;
-	//ordiRetourneMax joueur2 ;
+	ordiAleatoire joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
-	//joueur2.initProfondeur(3) ;
 
 	for (size_t j = 0 ; j < 100 ; j++)
 	{
@@ -83,6 +80,8 @@ int main()
 		}
 	}*/
 
+
+
 	ordiAleatoire joueur1 ;											
 	ordiMinMax joueur2 ;
 	ordiMinMax joueur1_ ;											
@@ -93,8 +92,8 @@ int main()
 	joueur1_.init(noir) ;
 	joueur2_.init(blanc) ;
 
-	joueur2.initProfondeur(2) ;
-	joueur1_.initProfondeur(2) ;
+	joueur2.initProfondeur(3) ;
+	joueur1_.initProfondeur(3) ;
 
 	for (size_t j = 0 ; j < 100 ; j++)				// joueur A est 50% blanc et 50% noir (le fichier est: [score joueur A, score joueur B, égalité (0) ou gagnant blanc (1) ou noir (2)])
 	{
@@ -150,6 +149,7 @@ int main()
 			fich << points_noir << ' ' << points_blanc << ' ' << gagnant << endl ;
 		}
 	}
+
   	fich.close() ;
 
 	return 0 ;
