@@ -32,7 +32,7 @@ class grille
     int numero_tour ;
     int nb_licites_b ;    //nb coups jouables blanc
     int nb_licites_n ;    //nb coups jouables noir
-    void rayonnement(int x, int y, int coul, int methode) ;
+    void rayonnement(int, int, int, int) ;
     void majNbCoupsLicite(int, int, int) ;
 } ;
 
@@ -72,7 +72,7 @@ class ordiRetourneMax : public humain         // hérite de humain, choisit un c
   public:
     void choixCoups(grille, int*, int*) ;
   protected:
-    int meilleurCoups(grille, int*, int*, bool) ;
+    int meilleurCoups(grille, int*, int*) ;
 } ;
 
 class ordiMinMax : public ordiRetourneMax

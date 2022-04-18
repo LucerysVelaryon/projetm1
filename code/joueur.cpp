@@ -72,49 +72,30 @@ void ordiAleatoire::choixCoups(grille ma_grille, int* coup_x, int* coup_y)  // O
 
 void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {
-  meilleurCoups(ma_grille, coup_x, coup_y, false) ;
+  meilleurCoups(ma_grille, coup_x, coup_y) ;
 }
 
-int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, bool couleur_joueur)     // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
+int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y)     // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
   int max = 0, xmax = 0, ymax = 0 ;
-  int min = 100, xmin = 0, ymin = 0 ;
   int val = 0 ;
-
-  int coul = couleur ;
-  if (couleur_joueur)
-    coul = changeCouleur(coul) ;
 
   for (size_t i = 0 ; i < 8 ; i++)
     for (size_t j = 0 ; j < 8 ; j++)
-      if (licite(coul, ma_grille.g[i][j][0]))
+      if (licite(couleur, ma_grille.g[i][j][0]))
       {
-        val = ma_grille.g[i][j][coul/11] ;
+        val = ma_grille.g[i][j][couleur/11] ;
         if (val > max)
         {
           max = val ;
           xmax = i ;
           ymax = j ;
         }
-        if (val < min)
-        {
-          min = val ;
-          xmin = i ;
-          ymin = j ;
-        }
       }
-  if (couleur_joueur)
-  {
-    *coup_x = xmin ;
-    *coup_y = ymin ;
-    return min ;
-  }
-  else 
-  {
-    *coup_x = xmax ;
-    *coup_y = ymax ;
-    return max ;
-  }
+
+  *coup_x = xmax ;
+  *coup_y = ymax ;
+  return max ;
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
@@ -133,16 +114,15 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 {
   grille nouvelle_grille = ma_grille ;
   int var_x ; int var_y ;
-  int coul ;
 
-  if ((profondeur_max - profondeur) % 2 == 0)
-    coul = couleur ;
-  else
-    coul = changeCouleur(couleur) ;
-
-  if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.recupNbLicites(coul) == 0)
+  if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.recupNbLicites(couleur) == 0)
   {
-    return this->meilleurCoups(nouvelle_grille, coup_x, coup_y, (coul != couleur)) ;
+    int score ;
+    for (size_t i = 0 ; i <= 7 ; i++)
+      for (size_t j = 0 ; j <= 7 ; j++)
+        if (nouvelle_grille.g[i][j][0] == couleur)
+          score++ ;
+    return score ;
   }
 
   int plus_haut_score ;
@@ -153,9 +133,9 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 
     for (size_t i = 0 ; i < 8 ; i++)
       for (size_t j = 0 ; j < 8 ; j++)
-        if (licite(coul, nouvelle_grille.g[i][j][0]))
+        if (licite(couleur, nouvelle_grille.g[i][j][0]))
         {
-          nouvelle_grille.retournerPlacer(i, j, coul) ;
+          nouvelle_grille.retournerPlacer(i, j, couleur) ;
           int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
           nouvelle_grille = ma_grille ;
           if (score > plus_haut_score)
@@ -179,9 +159,9 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 
     for (size_t i = 0 ; i < 8 ; i++)
       for (size_t j = 0 ; j < 8 ; j++)
-        if (licite(coul, nouvelle_grille.g[i][j][0]))
+        if (licite(changeCouleur(couleur), nouvelle_grille.g[i][j][0]))
         {
-          nouvelle_grille.retournerPlacer(i, j, coul) ;
+          nouvelle_grille.retournerPlacer(i, j, changeCouleur(couleur)) ;
           int score = this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y) ;
           nouvelle_grille = ma_grille ;
           if (score < plus_haut_score)
