@@ -41,7 +41,7 @@ int main()
 	joueur2.init(blanc) ;*/
 
 	fstream fich ;
-	fich.open("data/retourneMax.dat", ios::out) ;
+	fich.open("data/MinMax_prof3.dat", ios::out) ;
 
 	int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
@@ -84,14 +84,17 @@ int main()
 	}*/
 
 	ordiAleatoire joueur1 ;											
-	ordiRetourneMax joueur2 ;
-	ordiRetourneMax joueur1_ ;											
+	ordiMinMax joueur2 ;
+	ordiMinMax joueur1_ ;											
 	ordiAleatoire joueur2_ ;
 
 	joueur1.init(noir) ;   		// joueur1 est forcément noir
 	joueur2.init(blanc) ;
 	joueur1_.init(noir) ;
 	joueur2_.init(blanc) ;
+
+	joueur2.initProfondeur(3) ;
+	joueur1_.initProfondeur(3) ;
 
 	for (size_t j = 0 ; j < 100 ; j++)
 	{
