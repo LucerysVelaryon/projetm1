@@ -142,5 +142,7 @@ int main()
 	}
   	fich.close() ;
 
+  	cout << gagne_b << " " << gagne_n << endl ;
+
 	return 0 ;
 }

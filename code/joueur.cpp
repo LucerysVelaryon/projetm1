@@ -78,6 +78,7 @@ void ordiRetourneMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, bool couleur_joueur)     // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
 {
   int max = 0, xmax = 0, ymax = 0 ;
+  int min = 100, xmin = 0, ymin = 0 ;
   int val = 0 ;
 
   int coul = couleur ;
@@ -95,10 +96,25 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y, b
           xmax = i ;
           ymax = j ;
         }
+        if (val < min)
+        {
+          min = val ;
+          xmin = i ;
+          ymin = j ;
+        }
       }
-  *coup_x = xmax ;
-  *coup_y = ymax ;
-  return max ;
+  if (couleur_joueur)
+  {
+    *coup_x = xmin ;
+    *coup_y = ymin ;
+    return min ;
+  }
+  else 
+  {
+    *coup_x = xmax ;
+    *coup_y = ymax ;
+    return max ;
+  }
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
