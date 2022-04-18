@@ -40,18 +40,20 @@ int main()
 	humain joueur2 ;
 	joueur2.init(blanc) ;*/
 
-	ordiAleatoire joueur1 ;											// 1 humain (noir) ; 1 ordi (blanc)
-	ordiAleatoire joueur2 ;
+	fstream fich ;
+	fich.open("data/retourneMax.dat", ios::out) ;
+
+	int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
+
+
+/*
+	ordiAleatoire joueur1 ;											
+	ordiMinMax joueur2 ;
 	//ordiRetourneMax joueur2 ;
 	joueur1.init(noir) ;
 	joueur2.init(blanc) ;
 	//joueur2.initProfondeur(3) ;
 
-	fstream fich ;
-	fich.open("data/alea_j1VSj2.dat", ios::out) ;
-
-	int points_noir, points_blanc, gagnant = 0 ;					// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
-	/*
 	for (size_t j = 0 ; j < 100 ; j++)
 	{
 		for (size_t i = 0 ; i < 1000 ; i++)							// Nombre de parties, Noir VS blanc
@@ -80,12 +82,20 @@ int main()
 			fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 		}
 	}*/
+
+	ordiAleatoire joueur1 ;											
+	ordiRetourneMax joueur2 ;
+	ordiRetourneMax joueur1_ ;											
+	ordiAleatoire joueur2_ ;
+
+	joueur1.init(noir) ;   		// joueur1 est forcément noir
+	joueur2.init(blanc) ;
+	joueur1_.init(noir) ;
+	joueur2_.init(blanc) ;
+
 	for (size_t j = 0 ; j < 100 ; j++)
 	{
-		ordiAleatoire joueur1 ;											
-		ordiAleatoire joueur2 ;
-
-		for (size_t i = 0 ; i < 500 ; i++)								// Nombre de parties, 50% blanc, 50% noir
+		for (size_t i = 0 ; i < 500 ; i++)								// joueur A est blanc
 		{
 			points_noir = 0 ; points_blanc = 0 ;						
 			grille_de_jeu.init() ;
@@ -111,10 +121,7 @@ int main()
 			fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 		}
 
-		ordiAleatoire joueur1 ;											
-		ordiAleatoire joueur2 ;
-
-		for (size_t i = 0 ; i < 500 ; i++)								// Nombre de parties
+		for (size_t i = 0 ; i < 500 ; i++)								  // joueur A est noir
 		{
 			points_noir = 0 ; points_blanc = 0 ;						
 			grille_de_jeu.init() ;
@@ -124,25 +131,23 @@ int main()
 				if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
 				{
 					//grille_de_jeu.affichageJeu() ;
-					joueur1.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-					grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1.recupCouleur()) ;
+					joueur1_.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+					grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur1_.recupCouleur()) ;
 				}
 				else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
 				{
 					//grille_de_jeu.affichageJeu() ;
-					joueur2.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-					grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2.recupCouleur()) ;
+					joueur2_.choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+					grille_de_jeu.retournerPlacer(coup_x, coup_y, joueur2_.recupCouleur()) ;
 				}
 				grille_de_jeu.incrementNumeroTour() ;
 			}
 			//grille_de_jeu.affichageJeu() ;
 			grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
-			fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
+			fich << points_noir << ' ' << points_blanc << ' ' << gagnant << endl ;
 		}
 	}
   	fich.close() ;
-
-  	cout << gagne_b << " " << gagne_n << endl ;
 
 	return 0 ;
 }
