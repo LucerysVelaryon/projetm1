@@ -237,17 +237,14 @@ void grille::gagnant(int* nb_blancs, int* nb_noirs, int* gagnant)
 
   if (*nb_noirs > *nb_blancs)
   {
-    //cout << "Joueur Noir a gagné ! " << *nb_noirs << " contre "  << *nb_blancs << " pour Joueur Blanc" << endl ;
     *gagnant = 2 ;
   }
   else if (*nb_noirs < *nb_blancs)
   {
-    //cout << "Joueur Blanc a gagné ! " << *nb_blancs << " contre "  << *nb_noirs << " pour Joueur Noir" << endl ;
     *gagnant = 1 ;
   }
   else
   {
-    //cout << "Egalité ! " << *nb_blancs << " partout !" << endl ;
     *gagnant = 0 ;
   }
 }

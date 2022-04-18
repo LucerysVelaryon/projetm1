@@ -46,9 +46,9 @@ class grille
 class humain
 {
   public:
-    void init(int) ;
+    virtual void init(int) ;
     int recupCouleur() ;
-    void choixCoups(grille, int*, int*) ;
+    virtual void choixCoups(grille, int*, int*) ;
   protected:
     int couleur ;
 } ;
@@ -75,10 +75,10 @@ class ordiRetourneMax : public humain         // hérite de humain, choisit un c
     int meilleurCoups(grille, int*, int*) ;
 } ;
 
-class ordiMinMax : public ordiRetourneMax
+class ordiMinMax : public humain
 {
   public:
-    void initProfondeur(int) ;
+    void init (int) ;
     void choixCoups(grille, int*, int*) ;
   private:
     int profondeur_max ;

@@ -100,9 +100,11 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y)  
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
 
-void ordiMinMax::initProfondeur(int prof)
+void ordiMinMax::init(int coul)
 {
-  profondeur_max = prof ;
+	couleur = coul ;
+	cout << "Quelle profondeur ? (strict. > 0)" << endl ;
+	cin >> profondeur_max ;
 }
 
 void ordiMinMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
