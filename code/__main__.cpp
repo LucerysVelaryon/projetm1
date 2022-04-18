@@ -106,9 +106,9 @@ int main()
 		fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 	}
 
+	int gagne_b = 0, gagne_n = 0 ;
 	joueur1.init(blanc) ;
 	joueur2.init(noir) ;
-
 	for (size_t i = 0 ; i < 5000 ; i++)								// Nombre de parties
 	{
 		points_noir = 0 ; points_blanc = 0 ;						
@@ -133,9 +133,15 @@ int main()
 		//grille_de_jeu.affichageJeu() ;
 		grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
 		fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
+		if (gagnant==1) 
+			gagne_b++ ;
+		else if (gagnant==2)
+			gagne_n++ ;
 	}
 */
   	fich.close() ;
+
+  	cout << gagne_b << " " << gagne_n << endl ;
 
 	return 0 ;
 }
