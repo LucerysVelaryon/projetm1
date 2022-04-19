@@ -25,8 +25,8 @@ int main()
 	cin >> mode_de_jeu ;
 	cout << endl ;
 
-	fstream fich ;
-	fich.open("data/test.dat", ios::out) ;
+	string nom_fichier = "vide" ;
+	
 
 	int nb_generations = 1, nb_parties = 1 ;
 	if (mode_de_jeu == 2) 
@@ -37,7 +37,13 @@ int main()
 		cout << "Combien de parties ?" << endl ;
 		cin >> nb_parties ;
 		cout << endl ;
+		cout << "Quel nom pour le fichier ?" << endl ;
+		cin >> nom_fichier ;
+		cout << endl ;
 	}
+
+	fstream fich ;
+	fich.open("data/"+nom_fichier+".dat", ios::out) ;
 	
 	humain *joueur1, *joueur2 ;
 
@@ -76,6 +82,9 @@ int main()
  	
  	joueur1->init(noir) ;
 	joueur2->init(blanc) ;
+
+	if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2)) 
+		nb_parties = int(nb_parties/2) ;
 
 	int points_noir, points_blanc, gagnant = 0 ;	// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
@@ -130,6 +139,37 @@ int main()
 			}
 			else if (mode_de_jeu == 2)
 				fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
+		}
+	}
+
+	if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2))
+	{
+		joueur1->init(blanc) ;
+		joueur2->init(noir) ;
+		for (size_t j = 0 ; j < unsigned(nb_generations) ; j++)
+		{
+			for (size_t i = 0 ; i < unsigned(nb_parties) ; i++)	
+			{	
+				points_noir = 0 ; points_blanc = 0 ;						
+				grille_de_jeu.init() ;
+				int coup_x = 0, coup_y = 0 ;
+				while (!grille_de_jeu.jeuFini())
+				{
+					if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
+					{
+						joueur2->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+						grille_de_jeu.retournerPlacer(coup_x, coup_y, noir) ;
+					}
+					else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
+					{
+						joueur1->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+						grille_de_jeu.retournerPlacer(coup_x, coup_y, blanc) ;
+					}
+					grille_de_jeu.incrementNumeroTour() ;
+				}
+				grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
+				fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
+			}
 		}
 	}
 

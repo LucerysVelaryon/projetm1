@@ -1,4 +1,3 @@
-
 %matplotlib inline
 import numpy as np
 import matplotlib 
@@ -20,7 +19,6 @@ def sci(x):
 ​
 def sci_s(x):
     return str(sci(x))
-
   
 def afficheHisto_1data(string):     #Prend en argument 1 liste de scores
     data = np.loadtxt(string, delimiter = ' ')
@@ -76,7 +74,6 @@ def stats_50(string, str_jA, str_jB):   #Moyenne sur 100 sets de 1000 data, qd 5
         nbVict[i][2] += np.sum(gagnant[500:] == 1)      #Vict de joueur B
     afficheHisto_moy(np.mean(nbVict, axis=0), np.std(nbVict, axis=0), str_jA, str_jB, 1000)
 
-​
 def model(x, a, sigma, mu):
     return a * (1/(sigma*np.sqrt(2*np.pi))) * np.exp(- (x-mu)*(x-mu)/(2*sigma*sigma))
 ​

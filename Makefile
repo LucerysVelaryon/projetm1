@@ -24,5 +24,6 @@ clean:
 dist-clean: build clean
 	rm -f *~ code/.depend 
 	rm Othello 
+	rm -f data/vide.dat
 
 include .depend
