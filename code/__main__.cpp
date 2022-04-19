@@ -79,9 +79,6 @@ int main()
 		joueur2 = &omm2 ;
 	else 
 		joueur2 = &h2 ;
- 	
- 	joueur1->init(noir) ;
-	joueur2->init(blanc) ;
 
 	if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2)) 
 		nb_parties = int(nb_parties/2) ;
@@ -90,6 +87,8 @@ int main()
 
 	for (size_t j = 0 ; j < unsigned(nb_generations) ; j++)
 	{
+		joueur1->init(noir) ;
+		joueur2->init(blanc) ;
 		for (size_t i = 0 ; i < unsigned(nb_parties) ; i++)	
 		{	
 			points_noir = 0 ; points_blanc = 0 ;						
@@ -140,37 +139,34 @@ int main()
 			else if (mode_de_jeu == 2)
 				fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 		}
-	}
 
-	if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2))
-	{
-		joueur1->init(blanc) ;
-		joueur2->init(noir) ;
-		for (size_t j = 0 ; j < unsigned(nb_generations) ; j++)
-		{
-			for (size_t i = 0 ; i < unsigned(nb_parties) ; i++)	
-			{	
-				points_noir = 0 ; points_blanc = 0 ;						
-				grille_de_jeu.init() ;
-				int coup_x = 0, coup_y = 0 ;
-				while (!grille_de_jeu.jeuFini())
-				{
-					if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
+		if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2))
+			{
+				joueur1->init(blanc) ;
+				joueur2->init(noir) ;
+				for (size_t i = 0 ; i < unsigned(nb_parties) ; i++)	
+				{	
+					points_noir = 0 ; points_blanc = 0 ;						
+					grille_de_jeu.init() ;
+					int coup_x = 0, coup_y = 0 ;
+					while (!grille_de_jeu.jeuFini())
 					{
-						joueur2->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-						grille_de_jeu.retournerPlacer(coup_x, coup_y, noir) ;
+						if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
+						{
+							joueur2->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+							grille_de_jeu.retournerPlacer(coup_x, coup_y, noir) ;
+						}
+						else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
+						{
+							joueur1->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+							grille_de_jeu.retournerPlacer(coup_x, coup_y, blanc) ;
+						}
+						grille_de_jeu.incrementNumeroTour() ;
 					}
-					else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
-					{
-						joueur1->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-						grille_de_jeu.retournerPlacer(coup_x, coup_y, blanc) ;
-					}
-					grille_de_jeu.incrementNumeroTour() ;
+					grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
+					fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 				}
-				grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
-				fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
 			}
-		}
 	}
 
 	fich.close() ;
