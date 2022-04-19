@@ -87,9 +87,9 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y)  
         val = ma_grille.g[i][j][couleur/11] ;
         if (val > max)
         {
-          max = val ;
-          xmax = i ;
-          ymax = j ;
+         	max = val ;
+         	xmax = i ;
+         	ymax = j ;
         }
       }
 
@@ -103,7 +103,7 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y)  
 void ordiMinMax::init(int coul)
 {
 	couleur = coul ;
-	cout << "Quelle profondeur ? (>= 0)" << endl ;
+	cout << "Quelle profondeur ? (stric. > 0)" << endl ;
 	cin >> profondeur_max ;
 }
 
@@ -119,7 +119,7 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 
   if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.recupNbLicites(couleur) == 0)
   {
-    int score ;
+    int score = 0 ;
     for (size_t i = 0 ; i <= 7 ; i++)
       for (size_t j = 0 ; j <= 7 ; j++)
         if (nouvelle_grille.g[i][j][0] == couleur)
