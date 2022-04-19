@@ -50,7 +50,8 @@ int main()
 	humain h1, h2 ;
 	ordiAleatoire oa1, oa2 ;
 	ordiRetourneMax orm1, orm2 ;
-	ordiMinMax omm1, omm2 ;
+	ordiMinMaxRapide omm1, omm2 ;
+	int profondeur_max1, profondeur_max2 ;
 
 	int num_joueur1, num_joueur2 ;
 	cout << "Qui sera le joueur noir ? (premier à jouer)" << endl ;
@@ -67,7 +68,11 @@ int main()
 	else if (num_joueur1 == 3)
 		joueur1 = &orm1 ;
 	else if (num_joueur1 == 4)
+	{
 		joueur1 = &omm1 ;
+		cout << "Quelle profondeur ? (stric. > 0)" << endl ;
+		cin >> profondeur_max1 ;
+	}
 	else 
 		joueur1 = &h1 ;
 
@@ -76,7 +81,11 @@ int main()
 	else if (num_joueur2 == 3)
 		joueur2 = &orm2 ;
 	else if (num_joueur2 == 4)
+	{
 		joueur2 = &omm2 ;
+		cout << "Quelle profondeur ? (stric. > 0)" << endl ;
+		cin >> profondeur_max2 ;
+	}
 	else 
 		joueur2 = &h2 ;
 
@@ -85,11 +94,14 @@ int main()
 
 	int points_noir, points_blanc, gagnant = 0 ;	// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
-	for (size_t j = 0 ; j < unsigned(nb_generations) ; j++)
+	int temps = int(time(NULL)) ;
+	cout << temps << endl ;
+
+	for (size_t i = 0 ; i < unsigned(nb_generations) ; i++)
 	{
-		joueur1->init(noir) ;
-		joueur2->init(blanc) ;
-		for (size_t i = 0 ; i < unsigned(nb_parties) ; i++)	
+		joueur1->init(noir, profondeur_max1) ;
+		joueur2->init(blanc, profondeur_max2) ;
+		for (size_t j = 0 ; j < unsigned(nb_parties) ; j++)	
 		{	
 			points_noir = 0 ; points_blanc = 0 ;						
 			grille_de_jeu.init() ;
@@ -141,35 +153,39 @@ int main()
 		}
 
 		if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2))
-			{
-				joueur1->init(blanc) ;
-				joueur2->init(noir) ;
-				for (size_t i = 0 ; i < unsigned(nb_parties) ; i++)	
-				{	
-					points_noir = 0 ; points_blanc = 0 ;						
-					grille_de_jeu.init() ;
-					int coup_x = 0, coup_y = 0 ;
-					while (!grille_de_jeu.jeuFini())
+		{
+			joueur1->init(blanc, profondeur_max1) ;
+			joueur2->init(noir, profondeur_max2) ;
+			for (size_t j = 0 ; j < unsigned(nb_parties) ; j++)	
+			{	
+				points_noir = 0 ; points_blanc = 0 ;						
+				grille_de_jeu.init() ;
+				int coup_x = 0, coup_y = 0 ;
+				while (!grille_de_jeu.jeuFini())
+				{
+					if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
 					{
-						if ((grille_de_jeu.recupNumeroTour() % 2 == 0) && (grille_de_jeu.recupNbLicites(noir) != 0))
-						{
-							joueur2->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-							grille_de_jeu.retournerPlacer(coup_x, coup_y, noir) ;
-						}
-						else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
-						{
-							joueur1->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
-							grille_de_jeu.retournerPlacer(coup_x, coup_y, blanc) ;
-						}
-						grille_de_jeu.incrementNumeroTour() ;
+						joueur2->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+						grille_de_jeu.retournerPlacer(coup_x, coup_y, noir) ;
 					}
-					grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
-					fich << points_blanc << ' ' << points_noir << ' ' << gagnant << endl ;
+					else if ((grille_de_jeu.recupNumeroTour() % 2 != 0) && (grille_de_jeu.recupNbLicites(blanc) != 0))
+					{
+						joueur1->choixCoups(grille_de_jeu, &coup_x, &coup_y) ;
+						grille_de_jeu.retournerPlacer(coup_x, coup_y, blanc) ;
+					}
+					grille_de_jeu.incrementNumeroTour() ;
 				}
+				grille_de_jeu.gagnant(&points_blanc, &points_noir, &gagnant) ;
+				fich << points_noir << ' ' << points_blanc << ' ' << gagnant << endl ;
 			}
+		}
+
+		cout << (100*i)/nb_generations << " %     " << endl ;
 	}
 
 	fich.close() ;
+
+	cout << int(time(NULL))-temps << endl ;
 
 	return 0 ;
 }

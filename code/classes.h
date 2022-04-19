@@ -46,7 +46,7 @@ class grille
 class humain
 {
   public:
-    virtual void init(int) ;
+    virtual void init(int, int) ;
     int recupCouleur() ;
     virtual void choixCoups(grille, int*, int*) ;
   protected:
@@ -63,7 +63,7 @@ class humain
 class ordiAleatoire : public humain         // hérite de humain, choisit un coup aléatoire parmis les coups possibles de sa couleur
 {
   public:
-    void init(int) ;
+    void init(int, int) ;
     void choixCoups(grille, int*, int*) ;
 } ;
 
@@ -78,11 +78,21 @@ class ordiRetourneMax : public humain         // hérite de humain, choisit un c
 class ordiMinMax : public humain
 {
   public:
-    void init (int) ;
+    void init (int, int) ;
+    virtual void choixCoups(grille, int*, int*) ;
+  private:
+    int profondeur_max ;
+    virtual int fonctionMinMax(grille, int, int*, int*) ;
+} ;
+
+class ordiMinMaxRapide : public ordiMinMax
+{
+  public:
+    void init (int, int) ;
     void choixCoups(grille, int*, int*) ;
   private:
     int profondeur_max ;
-    int fonctionMinMax(grille, int, int*, int*) ;
+    int fonctionMinMax(grille, int, int*, int*, int) ;
 } ;
 
 #endif

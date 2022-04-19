@@ -10,7 +10,7 @@ using namespace std;
 extern int blanc ;
 extern int noir ;
 
-void humain::init(int coul)
+void humain::init(int coul, int prof)
 {
   couleur = coul ;
 }
@@ -40,7 +40,7 @@ void humain::choixCoups(grille ma_grille, int* coup_x, int* coup_y)   // On utli
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
 
-void ordiAleatoire::init(int coul)
+void ordiAleatoire::init(int coul, int prof)
 {
   couleur = coul ;
   srand(time(NULL));    //Inititialise la graine, pour l'aléatoire de l'ordi
@@ -100,11 +100,10 @@ int ordiRetourneMax::meilleurCoups(grille ma_grille, int* coup_x, int* coup_y)  
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
 
-void ordiMinMax::init(int coul)
+void ordiMinMax::init(int coul, int prof)
 {
 	couleur = coul ;
-	cout << "Quelle profondeur ? (stric. > 0)" << endl ;
-	cin >> profondeur_max ;
+	profondeur_max = prof ;
 }
 
 void ordiMinMax::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
@@ -169,6 +168,83 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
           if (score < plus_haut_score)
           {
             plus_haut_score = score ;
+            var_x = i ;
+            var_y = j ;
+          }
+        }
+  }
+
+  return plus_haut_score ;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------- */
+
+void ordiMinMaxRapide::init(int coul, int prof)
+{
+	couleur = coul ;
+	profondeur_max = prof ;
+}
+
+void ordiMinMaxRapide::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
+{
+  this->fonctionMinMax(ma_grille, profondeur_max, coup_x, coup_y, 0) ;
+}
+
+int ordiMinMaxRapide::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, int* coup_y, int score)
+{
+  grille nouvelle_grille = ma_grille ;
+  int var_x ; int var_y ;
+
+  if (nouvelle_grille.jeuFini() || profondeur == 0 || nouvelle_grille.recupNbLicites(couleur) == 0)
+    return 0 ;
+
+  int plus_haut_score ;
+  int var_score ;
+
+  if ((profondeur_max - profondeur) % 2 == 0)
+  {
+    plus_haut_score = -2147483648 ;
+
+    for (size_t i = 0 ; i < 8 ; i++)
+      for (size_t j = 0 ; j < 8 ; j++)
+        if (licite(couleur, nouvelle_grille.g[i][j][0]))
+        {
+        	 var_score = score ;
+          var_score += nouvelle_grille.g[i][j][couleur/11] + 1 ;
+          nouvelle_grille.retournerPlacer(i, j, couleur) ;
+          var_score += this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y, var_score) ;
+          nouvelle_grille = ma_grille ;
+          if (var_score > plus_haut_score)	
+          {
+            plus_haut_score = var_score ;
+            var_x = i ;
+            var_y = j ;
+          }
+        }
+
+    if (profondeur == profondeur_max)
+    {
+      *coup_x = var_x ;
+      *coup_y = var_y ;
+    }
+  }
+
+  else
+  {
+    plus_haut_score = + 2147483647 ;
+
+    for (size_t i = 0 ; i < 8 ; i++)
+      for (size_t j = 0 ; j < 8 ; j++)
+        if (licite(changeCouleur(couleur), nouvelle_grille.g[i][j][0]))
+        {
+        	 var_score = score ;
+        	 var_score -= nouvelle_grille.g[i][j][changeCouleur(couleur)/11] - 1 ;
+          nouvelle_grille.retournerPlacer(i, j, changeCouleur(couleur)) ;
+          var_score += this->fonctionMinMax(nouvelle_grille, profondeur-1, coup_x, coup_y, var_score) ;
+          nouvelle_grille = ma_grille ;
+          if (var_score < plus_haut_score)
+          {
+            plus_haut_score = var_score ;
             var_x = i ;
             var_y = j ;
           }
