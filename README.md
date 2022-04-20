@@ -61,6 +61,6 @@ Implémentation en C++, Python3. Modules utilisés : .
 - [x] Implémenter un environnement et une interface permettant de jouer à _Othello_ ;
 - [x] Concevoir et implémenter des algorithmes dits "ordinateurs" pour jouer à _Othello_ ;
 - [x] Comparer les performances (en terme de résultats) des différents algorithmes et en tirer une conclusion ;
-- [ ] Comparere les algorithmes en temps ;
+- [ ] Comparer les algorithmes en temps ;
 - [ ] Améliorer MinMax avec des méthodes de coupures AlphaBeta ;
 - [ ] Coder de nouveaux ordinateurs en utilisant des algorithmes propres à _Othello_.
