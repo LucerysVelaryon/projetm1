@@ -2,6 +2,12 @@
 
 Projet d'informatique de l'UE _Informatique Avancée : Modélisation Numérique et Programmation Orientée Objet C++_ dans le cadre d'une formation en Master 1/Magistère 2 de Physique Fondamentale à l'Université Paris-Saclay. Sujet Libre. Langage de programmation majoritairement en C++. Par Elianor Hoffmann et Pierre Boistier.
 
+## Exécution
+
+**Pour le programme en C++** : Se placer dans le dossier, dans le même répertoire que le fichier Makefile. Lancer **make all** puis **./Othello**. Une fois l'utilisation terminée, **make clean**, ou **make dist-clean** pour une remise à zéro du dossier.
+
+**Pour l'analyse de données** : Ouvrir graphiques.ipynb avec Jupyter.
+
 ## Contexte
 _Reversi_ (1880, Angleterre, Lewis Waterman et John W. Mollet), aussi connu sous le nom _Othello_ (1971, Japon, Goro Hasegawa) est un jeu de société combinatoire abstrait pouvant rappeler les jeux de dames, échecs ou go par son plateau, ses pions et ses mécanismes. Il se joue sur un plateau unicolore de 8x8 cases, appelé othellier (_cf_. Figure 1). Les joueurs disposent de 64 pions bicolores, noirs d’un côté et blancs de l’autre. Les joueurs jouent à tour de rôle, chacun étant tenu de capturer des pions adverses lors de son mouvement. La capture de pions survient lorsqu’un joueur place un de ses pions à l’extrémité d’un alignement de pions adverses contigus et dont l’autre extrémité est déjà occupée par un de ses propres pions (_cf_. Figure 1). Le jeu s’arrête quand les deux joueurs ne peuvent plus poser de pion. Le gagnant en fin de partie est celui qui possède le plus de pions de sa couleur. 
 
@@ -52,7 +58,7 @@ Lorsqu’aucun coup légal n’est possible de la part des deux joueurs. Cela in
 
 # Implémentation
 
-Implémentation en C++, Python3. Modules utilisés : .
+Implémentation en C++, Python3.
 
 # Progression
 
