@@ -50,16 +50,17 @@ int main()
 	humain h1, h2 ;
 	ordiAleatoire oa1, oa2 ;
 	ordiRetourneMax orm1, orm2 ;
-	ordiMinMaxRapide omm1, omm2 ;
+	ordiMinMax omm1, omm2 ;
+	ordiMinMaxRapide ommr1, ommr2 ;
 	int profondeur_max1, profondeur_max2 ;
 
 	int num_joueur1, num_joueur2 ;
 	cout << "Qui sera le joueur noir ? (premier à jouer)" << endl ;
-	cout << "humain (1), ordiAleatoire (2), ordiRetourneMax (3), ordiMinMax (4)" << endl ;
+	cout << "humain (1), ordiAleatoire (2), ordiRetourneMax (3), ordiMinMax (4), ordiMinMaxRapide (5)" << endl ;
 	cin >> num_joueur1 ;
 	cout << endl ;
 	cout << "Qui sera le joueur blanc ? (deuxième à jouer)" << endl ;
-	cout << "humain (1), ordiAleatoire (2), ordiRetourneMax (3), ordiMinMax (4)" << endl ;
+	cout << "humain (1), ordiAleatoire (2), ordiRetourneMax (3), ordiMinMax (4), ordiMinMaxRapide (5)" << endl ;
 	cin >> num_joueur2 ;
 	cout << endl ;
 	
@@ -73,6 +74,12 @@ int main()
 		cout << "Quelle profondeur ? (stric. > 0)" << endl ;
 		cin >> profondeur_max1 ;
 	}
+	else if (num_joueur1 == 5)
+	{
+		joueur1 = &ommr1 ;
+		cout << "Quelle profondeur ? (stric. > 0)" << endl ;
+		cin >> profondeur_max1 ;
+	}
 	else 
 		joueur1 = &h1 ;
 
@@ -83,6 +90,12 @@ int main()
 	else if (num_joueur2 == 4)
 	{
 		joueur2 = &omm2 ;
+		cout << "Quelle profondeur ? (stric. > 0)" << endl ;
+		cin >> profondeur_max2 ;
+	}
+	else if (num_joueur2 == 5)
+	{
+		joueur2 = &ommr2 ;
 		cout << "Quelle profondeur ? (stric. > 0)" << endl ;
 		cin >> profondeur_max2 ;
 	}

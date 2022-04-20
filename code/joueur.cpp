@@ -10,7 +10,7 @@ using namespace std;
 extern int blanc ;
 extern int noir ;
 
-void humain::init(int coul, int prof)
+void humain::init(int coul, int)
 {
   couleur = coul ;
 }
@@ -21,7 +21,7 @@ int humain::recupCouleur()
 }
 
 void humain::choixCoups(grille ma_grille, int* coup_x, int* coup_y)   // On utlise des pointeurs car le c++ ne peut pas renvoyer de couple...
-{                                   // On rajoute un argument qui sert à rien pour avoir la même structure que ordi::choixCoups
+{
   if (couleur == blanc)
     cout << "Au tour de blanc (joueur 2) : " << endl ;
   else
@@ -40,7 +40,7 @@ void humain::choixCoups(grille ma_grille, int* coup_x, int* coup_y)   // On utli
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
 
-void ordiAleatoire::init(int coul, int prof)
+void ordiAleatoire::init(int coul, int)
 {
   couleur = coul ;
   srand(time(NULL));    //Inititialise la graine, pour l'aléatoire de l'ordi
@@ -178,12 +178,6 @@ int ordiMinMax::fonctionMinMax(grille ma_grille, int profondeur, int* coup_x, in
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------- */
-
-void ordiMinMaxRapide::init(int coul, int prof)
-{
-	couleur = coul ;
-	profondeur_max = prof ;
-}
 
 void ordiMinMaxRapide::choixCoups(grille ma_grille, int* coup_x, int* coup_y)
 {

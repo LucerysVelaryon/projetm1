@@ -78,9 +78,9 @@ class ordiRetourneMax : public humain         // hérite de humain, choisit un c
 class ordiMinMax : public humain
 {
   public:
-    void init (int, int) ;
+    void init(int, int) ;
     virtual void choixCoups(grille, int*, int*) ;
-  private:
+  protected:
     int profondeur_max ;
     virtual int fonctionMinMax(grille, int, int*, int*) ;
 } ;
@@ -88,10 +88,8 @@ class ordiMinMax : public humain
 class ordiMinMaxRapide : public ordiMinMax
 {
   public:
-    void init (int, int) ;
     void choixCoups(grille, int*, int*) ;
   private:
-    int profondeur_max ;
     int fonctionMinMax(grille, int, int*, int*, int) ;
 } ;
 
