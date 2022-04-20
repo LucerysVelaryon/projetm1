@@ -58,6 +58,9 @@ Implémentation en C++, Python3. Modules utilisés : .
 
 État des objectifs le 16 février 2022 :
 - [x] Comprendre les enjeux du jeu _Othello_ ;
-- [ ] Implémenter un environnement et une interface permettant de jouer à _Othello_ ;
-- [ ] Concevoir et implémenter des algorithmes dits "ordinateurs" pour jouer à _Othello_ ;
-- [ ] Comparer les performances (en terme de temps et de résultats) des différents algorithmes et en tirer une conclusion.
+- [x] Implémenter un environnement et une interface permettant de jouer à _Othello_ ;
+- [x] Concevoir et implémenter des algorithmes dits "ordinateurs" pour jouer à _Othello_ ;
+- [x] Comparer les performances (en terme de résultats) des différents algorithmes et en tirer une conclusion ;
+- [ ] Comparere les algorithmes en temps ;
+- [ ] Améliorer MinMax avec des méthodes de coupures AlphaBeta ;
+- [ ] Coder de nouveaux ordinateurs en utilisant des algorithmes propres à _Othello_.
