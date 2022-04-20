@@ -105,10 +105,16 @@ int main()
 	if ((num_joueur1 != num_joueur2) && (mode_de_jeu == 2)) 
 		nb_parties = int(nb_parties/2) ;
 
+	if (mode_de_jeu == 1) 
+	{
+		cout << "Dans l'affichage qui suit, B représente un pion blanc, N représente un pion noir, 0 représente une case licite en fonction de la couleur du joueur dont c'est le tour" << endl ;
+		cout << endl ;
+	}
+
 	int points_noir, points_blanc, gagnant = 0 ;	// gagnant: 0 = égalité ; 1 = blanc a gagné ; 2 = noir a gagné
 
-	int temps = int(time(NULL)) ;
-	cout << temps << endl ;
+	//int temps = int(time(NULL)) ;
+	//cout << temps << endl ;
 
 	for (size_t i = 0 ; i < unsigned(nb_generations) ; i++)
 	{
@@ -198,7 +204,7 @@ int main()
 
 	fich.close() ;
 
-	cout << int(time(NULL))-temps << endl ;
+	//cout << int(time(NULL))-temps << endl ;
 
 	return 0 ;
 }
